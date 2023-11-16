@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Entities", "TurboCart.Entities\TurboCart.Entities.csproj", "{6322A990-DA7F-4BA5-B185-83C0958ACC1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Contexts", "TurboCart.Contexts\TurboCart.Contexts.csproj", "{48B5F5B8-DAFC-4B73-9D70-B7411557BA62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6322A990-DA7F-4BA5-B185-83C0958ACC1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6322A990-DA7F-4BA5-B185-83C0958ACC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6322A990-DA7F-4BA5-B185-83C0958ACC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6322A990-DA7F-4BA5-B185-83C0958ACC1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B5F5B8-DAFC-4B73-9D70-B7411557BA62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B5F5B8-DAFC-4B73-9D70-B7411557BA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B5F5B8-DAFC-4B73-9D70-B7411557BA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B5F5B8-DAFC-4B73-9D70-B7411557BA62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5115A469-BBB4-45AB-A0B1-9031B2DA56EE}
+	EndGlobalSection
+EndGlobal
