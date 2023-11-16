@@ -10,7 +10,7 @@ public class TurboCartContext
     public DbSet<Booking> Bookings { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(localdb\\mssqllocaldb;Database=TurboCartDb;Trusted_Connection=true;");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TurboCartDb;Trusted_Connection=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
