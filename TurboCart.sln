@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Domain.Entities",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Infrastructure.Persistance.Contexts", "TurboCart.Infrastructure.Persistance.Contexts\TurboCart.Infrastructure.Persistance.Contexts.csproj", "{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Infrastructure.Persistence.Interfaces", "TurboCart.Infrastructure.Persistence.Interfaces\TurboCart.Infrastructure.Persistence.Interfaces.csproj", "{5EE468AC-A7BD-48D0-AB14-245FB26CE115}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE468AC-A7BD-48D0-AB14-245FB26CE115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE468AC-A7BD-48D0-AB14-245FB26CE115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE468AC-A7BD-48D0-AB14-245FB26CE115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE468AC-A7BD-48D0-AB14-245FB26CE115}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0} = {4BE981CE-446A-4C1F-AD2E-27CDAD2139C4}
 		{2D0EA2BB-7A56-44F6-BB23-0049BB4ECF05} = {0CDEF897-728D-4C02-AD03-5A2FD99CC201}
 		{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
+		{5EE468AC-A7BD-48D0-AB14-245FB26CE115} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5115A469-BBB4-45AB-A0B1-9031B2DA56EE}
