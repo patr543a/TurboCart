@@ -3,7 +3,6 @@
 public interface IRepository<T>
 {
     void Save(T entity);
-    void Delete(T entity);
-    T GetById(object entityId);
+    T? GetById(object entityId);
     IEnumerable<T> GetAll();
 }
