@@ -5,4 +5,5 @@ namespace TurboCart.Infrastructure.Persistence.Interfaces.Repositories;
 public interface IBookingRepository
     : IRepository<Booking>
 {
+    IEnumerable<Booking> GetTodaysBookings();
 }
