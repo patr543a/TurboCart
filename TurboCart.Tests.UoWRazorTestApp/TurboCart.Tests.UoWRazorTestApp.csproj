@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TurboCart.Application.UseCases\TurboCart.Application.UseCases.csproj" />
+    <ProjectReference Include="..\TurboCart.Aspire\TurboCart.Aspire.ServiceDefaults\TurboCart.Aspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.Contexts\TurboCart.Infrastructure.Persistance.Contexts.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.Repositories\TurboCart.Infrastructure.Persistance.Repositories.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.UnitsOfWork\TurboCart.Infrastructure.Persistance.UnitOfWorks.csproj" />
+  </ItemGroup>
+
+</Project>
