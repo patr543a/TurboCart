@@ -2,7 +2,7 @@
 
 public interface IRepository<T>
 {
-    void Save(T entity);
+    void Add(T entity);
     T? GetById(object entityId);
     IEnumerable<T> GetAll();
 }
