@@ -15,6 +15,7 @@ var gatewayApi = builder.AddProject<Projects.TurboCart_Presentation_Apis_Gateway
 builder.AddProject<Projects.TurboCart_Presentation_Websites_TurboCartDK>("TurboCartDK")
     .WithReference(gatewayApi);
 
-builder.AddProject<Projects.TurboCart_Presentation_Websites_TurboCartManagement>("turbocart.presentation.websites.turbocartmanagement");
+builder.AddProject<Projects.TurboCart_Presentation_Websites_TurboCartManagement>("TurboCartManagement")
+    .WithReference(gatewayApi);
 
 builder.Build().Run();
