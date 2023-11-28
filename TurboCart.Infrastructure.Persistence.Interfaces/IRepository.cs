@@ -1,8 +1,16 @@
-﻿namespace TurboCart.Infrastructure.Persistence.Interfaces;
+﻿using System.Linq.Expressions;
 
-public interface IRepository<T>
+namespace TurboCart.Infrastructure.Persistence.Interfaces;
+
+public interface IRepository<TEntity, TKey>
 {
-    void Add(T entity);
-    T? GetById(object entityId);
-    IEnumerable<T> GetAll();
+    void Add(TEntity entity);
+    void Update(TEntity entity);
+    void Delete(TKey entityId);
+    void Delete(TEntity entity);
+    TEntity? GetById(TKey entityId, string? includes = null);
+    IEnumerable<TEntity>? GetAll(
+        Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        string? includes = null);
 }
