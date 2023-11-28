@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TurboCart.Application.Interfaces;
+using TurboCart.Domain.Entities;
 
 namespace TurboCart.Presentation.Websites.TurboCartDK.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel(IBookingUseCase _bookingUseCase)
+    : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    public IEnumerable<Booking>? Bookings { get; set; }
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public async Task<IActionResult> OnGetAsync()
     {
-        _logger = logger;
-    }
+        Bookings = await _bookingUseCase.GetAllBookings();
 
-    public void OnGet()
-    {
-
+        return Page();
     }
 }
