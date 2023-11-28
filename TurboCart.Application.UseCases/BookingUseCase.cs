@@ -4,35 +4,77 @@ using TurboCart.Infrastructure.Persistence.Interfaces.UnitOfWorks;
 
 namespace TurboCart.Application.UseCases;
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
 public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
     : IBookingUseCase
 {
-    public void BookNew(DateTime dateTime, Customer customer)
-    {
-        var booking = new Booking() { 
-            Start = dateTime, 
-            Customer = customer 
-        };
+    public async Task<bool?> IsValidBooking(Booking booking)
 
-        if (customer.CustomerId == 0)
-            _unitOfWork
-                .CustomerRepository
-                    .Add(customer);
-        
+    {
+        if (booking.Start < DateTime.Now)
+            return false;
+
+        if (booking.Customer is null && booking.CustomerId == 0)
+            return false;
+
+        return true;
+    }
+
+    public async Task<Booking?> GetBooking(int bookingId)
+        => _unitOfWork
+            .BookingRepository
+                .GetById(bookingId);
+
+    public async Task<IEnumerable<Booking>?> GetAllBookings()
+        => _unitOfWork
+            .BookingRepository
+                .GetAll();
+
+
+    public async Task<IEnumerable<Booking>?> GetTodaysBookings()
+        => _unitOfWork
+            .BookingRepository
+                .GetTodaysBookings();
+
+    public async Task<Booking?> AddBooking(Booking booking)
+    {
+        if (!await IsValidBooking(booking) ?? false)
+            throw new ArgumentException("Booking was not valid", nameof(booking));
+
         _unitOfWork
             .BookingRepository
                 .Add(booking);
 
         _unitOfWork.Commit();
+
+        return booking;
     }
 
-    public IEnumerable<Booking> GetAllBookings()
-        => _unitOfWork
-            .BookingRepository
-                .GetAll();
+    public async Task<Booking?> UpdateBooking(Booking booking)
+    {
+        if (!await IsValidBooking(booking) ?? false)
+            throw new ArgumentException("Booking was not valid", nameof(booking));
 
-    public IEnumerable<Booking> GetTodaysBookings()
-        => _unitOfWork
+        _unitOfWork
             .BookingRepository
-                .GetTodaysBookings();
+                .Update(booking);
+
+        _unitOfWork.Commit();
+
+        return booking;
+    }
+
+    public async Task<int?> DeleteBooking(int bookingId)
+    {
+        _unitOfWork
+            .BookingRepository
+                .Delete(bookingId);
+
+        _unitOfWork.Commit();
+
+        return bookingId;
+    }
 }
+
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
