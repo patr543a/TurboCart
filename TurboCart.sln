@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apis", "Apis", "{69F2BB4A-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Websites", "Websites", "{591E0ED3-6214-4CC9-B8FD-53BAD707C0EE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{1657160F-2A83-4D63-A307-59FF896BFA56}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistance", "Persistance", "{1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Domain.Entities", "TurboCart.Domain.Entities\TurboCart.Domain.Entities.csproj", "{2D0EA2BB-7A56-44F6-BB23-0049BB4ECF05}"
@@ -29,19 +27,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Infrastructure.Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Infrastructure.Persistance.Repositories", "TurboCart.Infrastructure.Persistance.Repositories\TurboCart.Infrastructure.Persistance.Repositories.csproj", "{B164FD65-3D1A-4FDD-BDE5-A4AC7ED9ABC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Aspire.AppHost", "TurboCart.Aspire\TurboCart.Aspire.AppHost\TurboCart.Aspire.AppHost.csproj", "{AF8539FC-BDCF-4CEE-A7F0-D0B675D312A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Aspire.AppHost", "TurboCart.Aspire\TurboCart.Aspire.AppHost\TurboCart.Aspire.AppHost.csproj", "{AF8539FC-BDCF-4CEE-A7F0-D0B675D312A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Aspire.ServiceDefaults", "TurboCart.Aspire\TurboCart.Aspire.ServiceDefaults\TurboCart.Aspire.ServiceDefaults.csproj", "{113D8531-1EAB-4250-A4C5-7AD8E38DB032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Application.Interfaces", "TurboCart.Application.Interfaces\TurboCart.Application.Interfaces.csproj", "{C71AF509-7786-40EC-83CB-76A151B92DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Application.Interfaces", "TurboCart.Application.Interfaces\TurboCart.Application.Interfaces.csproj", "{C71AF509-7786-40EC-83CB-76A151B92DBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Application.UseCases", "TurboCart.Application.UseCases\TurboCart.Application.UseCases.csproj", "{3264DDD3-BDBD-4E84-A917-4B0E91F713F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Application.UseCases", "TurboCart.Application.UseCases\TurboCart.Application.UseCases.csproj", "{3264DDD3-BDBD-4E84-A917-4B0E91F713F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Infrastructure.Persistance.UnitOfWorks", "TurboCart.Infrastructure.Persistance.UnitsOfWork\TurboCart.Infrastructure.Persistance.UnitOfWorks.csproj", "{8369A808-6DFC-4600-AC2F-805540EF7A39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Infrastructure.Persistance.UnitOfWorks", "TurboCart.Infrastructure.Persistance.UnitsOfWork\TurboCart.Infrastructure.Persistance.UnitOfWorks.csproj", "{8369A808-6DFC-4600-AC2F-805540EF7A39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Tests.UoWRazorTestApp", "TurboCart.Tests.UoWRazorTestApp\TurboCart.Tests.UoWRazorTestApp.csproj", "{0C2B8033-EB03-435A-AE3D-3FE79A46B8AC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Websites.TurboCartDK", "TurboCart.Presentation.Websites.TurboCartDK\TurboCart.Presentation.Websites.TurboCartDK.csproj", "{F54FF31A-B6CB-4FEF-B9D3-9ED19CD22BDE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Tests.Api", "TurboCart.Tests.Api\TurboCart.Tests.Api.csproj", "{4786087D-BC7B-405B-BC4F-A67F659DABDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Apis.Gateway", "TurboCart.Presentation.Apis.Gateway\TurboCart.Presentation.Apis.Gateway.csproj", "{87D28A76-6DD0-4EBE-8182-945653475248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Apis.Auth", "TurboCart.Presentation.Apis.Auth\TurboCart.Presentation.Apis.Auth.csproj", "{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Apis.TurboCart", "TurboCart.Presentation.Apis.TurboCart\TurboCart.Presentation.Apis.TurboCart.csproj", "{4E3677B7-3E2D-45A1-809B-7901C1E21B13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Apis.Session", "TurboCart.Presentation.Apis.Session\TurboCart.Presentation.Apis.Session.csproj", "{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Networking", "Networking", "{BDDAC06F-648B-4898-92C0-00007B340BC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCart.Infrastructure.Networking.Services", "TurboCart.Infrastructure.Networking.Services\TurboCart.Infrastructure.Networking.Services.csproj", "{3675F853-6DC2-4883-8855-04E24CDB999C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +105,30 @@ Global
 		{F54FF31A-B6CB-4FEF-B9D3-9ED19CD22BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F54FF31A-B6CB-4FEF-B9D3-9ED19CD22BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F54FF31A-B6CB-4FEF-B9D3-9ED19CD22BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4786087D-BC7B-405B-BC4F-A67F659DABDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4786087D-BC7B-405B-BC4F-A67F659DABDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4786087D-BC7B-405B-BC4F-A67F659DABDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4786087D-BC7B-405B-BC4F-A67F659DABDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D28A76-6DD0-4EBE-8182-945653475248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D28A76-6DD0-4EBE-8182-945653475248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D28A76-6DD0-4EBE-8182-945653475248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D28A76-6DD0-4EBE-8182-945653475248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E3677B7-3E2D-45A1-809B-7901C1E21B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3677B7-3E2D-45A1-809B-7901C1E21B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3677B7-3E2D-45A1-809B-7901C1E21B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3677B7-3E2D-45A1-809B-7901C1E21B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3675F853-6DC2-4883-8855-04E24CDB999C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3675F853-6DC2-4883-8855-04E24CDB999C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3675F853-6DC2-4883-8855-04E24CDB999C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3675F853-6DC2-4883-8855-04E24CDB999C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,17 +136,23 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{69F2BB4A-C97D-46DF-9DC2-750CFB465825} = {DB49ABB8-015F-490E-BCE4-94DB55DCCB26}
 		{591E0ED3-6214-4CC9-B8FD-53BAD707C0EE} = {DB49ABB8-015F-490E-BCE4-94DB55DCCB26}
-		{1657160F-2A83-4D63-A307-59FF896BFA56} = {CB3E2FE4-9E6F-4920-B8F1-2E5EFB1D3E92}
 		{1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0} = {4BE981CE-446A-4C1F-AD2E-27CDAD2139C4}
 		{2D0EA2BB-7A56-44F6-BB23-0049BB4ECF05} = {0CDEF897-728D-4C02-AD03-5A2FD99CC201}
 		{DD0C8FBA-C243-4D90-81EF-1E9964AEFF84} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
 		{5EE468AC-A7BD-48D0-AB14-245FB26CE115} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
 		{B164FD65-3D1A-4FDD-BDE5-A4AC7ED9ABC6} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
-		{C71AF509-7786-40EC-83CB-76A151B92DBE} = {1657160F-2A83-4D63-A307-59FF896BFA56}
+		{C71AF509-7786-40EC-83CB-76A151B92DBE} = {CB3E2FE4-9E6F-4920-B8F1-2E5EFB1D3E92}
 		{3264DDD3-BDBD-4E84-A917-4B0E91F713F1} = {CB3E2FE4-9E6F-4920-B8F1-2E5EFB1D3E92}
 		{8369A808-6DFC-4600-AC2F-805540EF7A39} = {1B079A32-D9AC-49FF-9CA9-CCC3184B4FD0}
 		{0C2B8033-EB03-435A-AE3D-3FE79A46B8AC} = {7D5109CF-C1BA-4CBB-8DA6-B317AD36818C}
 		{F54FF31A-B6CB-4FEF-B9D3-9ED19CD22BDE} = {591E0ED3-6214-4CC9-B8FD-53BAD707C0EE}
+		{4786087D-BC7B-405B-BC4F-A67F659DABDD} = {7D5109CF-C1BA-4CBB-8DA6-B317AD36818C}
+		{87D28A76-6DD0-4EBE-8182-945653475248} = {69F2BB4A-C97D-46DF-9DC2-750CFB465825}
+		{D86A06C5-6E64-4B65-9B2E-B99F4F1F4808} = {69F2BB4A-C97D-46DF-9DC2-750CFB465825}
+		{4E3677B7-3E2D-45A1-809B-7901C1E21B13} = {69F2BB4A-C97D-46DF-9DC2-750CFB465825}
+		{B49DB0AE-0BDE-4137-8EE8-AB1E3DE6292E} = {69F2BB4A-C97D-46DF-9DC2-750CFB465825}
+		{BDDAC06F-648B-4898-92C0-00007B340BC7} = {4BE981CE-446A-4C1F-AD2E-27CDAD2139C4}
+		{3675F853-6DC2-4883-8855-04E24CDB999C} = {BDDAC06F-648B-4898-92C0-00007B340BC7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5115A469-BBB4-45AB-A0B1-9031B2DA56EE}
