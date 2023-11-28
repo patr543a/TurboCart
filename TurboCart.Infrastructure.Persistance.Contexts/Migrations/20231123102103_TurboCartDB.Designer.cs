@@ -12,8 +12,8 @@ using TurboCart.Infrastructure.Persistance.Contexts;
 namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 {
     [DbContext(typeof(TurboCartContext))]
-    [Migration("20231116105134_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231123102103_TurboCartDB")]
+    partial class TurboCartDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,8 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CustomerId");
 
