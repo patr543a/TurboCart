@@ -5,10 +5,11 @@ using TurboCart.Infrastructure.Persistence.Interfaces.Repositories;
 namespace TurboCart.Infrastructure.Persistance.Repositories;
 
 public class BookingRepository(DbContext _dbContext)
-    : RepositoryBase<Booking>(_dbContext), IBookingRepository
+    : RepositoryBase<Booking, int>(_dbContext), IBookingRepository
 {
-    public IEnumerable<Booking> GetTodaysBookings()
-        => _set
-        .Where(b => b.Start.Date == DateTime.Today)
-        .ToArray();
+    public IEnumerable<Booking>? GetTodaysBookings()
+        => GetAll(b => b.Start.Date == DateTime.Today);
+
+    protected override int GetEntityId(Booking entity)
+        => entity.BookingId;
 }
