@@ -12,7 +12,7 @@ using TurboCart.Infrastructure.Persistance.Contexts;
 namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 {
     [DbContext(typeof(TurboCartContext))]
-    [Migration("20231123102103_TurboCartDB")]
+    [Migration("20231128104916_TurboCartDB")]
     partial class TurboCartDB
     {
         /// <inheritdoc />
@@ -62,6 +62,22 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("TurboCart.Domain.Entities.User", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Username");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TurboCart.Domain.Entities.Booking", b =>

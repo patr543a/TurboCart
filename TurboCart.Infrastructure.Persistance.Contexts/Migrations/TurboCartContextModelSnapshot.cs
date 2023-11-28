@@ -61,6 +61,22 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("TurboCart.Domain.Entities.User", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Username");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("TurboCart.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("TurboCart.Domain.Entities.Customer", "Customer")

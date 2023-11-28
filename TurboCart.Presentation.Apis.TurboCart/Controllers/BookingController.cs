@@ -12,9 +12,9 @@ public class BookingController(IBookingUseCase _bookingUseCase)
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookings()
     {
-        var bookings = _bookingUseCase.GetAllBookings();
+        var bookings = await _bookingUseCase.GetAllBookings();
 
-        return Ok(await bookings ?? []);
+        return Ok(bookings ?? []);
     }
 
     [HttpGet("{bookingId}")]
