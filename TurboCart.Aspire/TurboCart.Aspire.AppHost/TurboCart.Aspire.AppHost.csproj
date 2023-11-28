@@ -13,7 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TurboCart.Presentation.Apis.Auth\TurboCart.Presentation.Apis.Auth.csproj" />
+    <ProjectReference Include="..\..\TurboCart.Presentation.Apis.Gateway\TurboCart.Presentation.Apis.Gateway.csproj" />
+    <ProjectReference Include="..\..\TurboCart.Presentation.Apis.Session\TurboCart.Presentation.Apis.Session.csproj" />
+    <ProjectReference Include="..\..\TurboCart.Presentation.Apis.TurboCart\TurboCart.Presentation.Apis.TurboCart.csproj" />
     <ProjectReference Include="..\..\TurboCart.Presentation.Websites.TurboCartDK\TurboCart.Presentation.Websites.TurboCartDK.csproj" />
+    <ProjectReference Include="..\..\TurboCart.Tests.Api\TurboCart.Tests.Api.csproj" />
     <ProjectReference Include="..\..\TurboCart.Tests.UoWRazorTestApp\TurboCart.Tests.UoWRazorTestApp.csproj" />
   </ItemGroup>
 
