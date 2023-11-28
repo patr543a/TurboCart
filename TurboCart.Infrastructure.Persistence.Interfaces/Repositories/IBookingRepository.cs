@@ -3,7 +3,7 @@
 namespace TurboCart.Infrastructure.Persistence.Interfaces.Repositories;
 
 public interface IBookingRepository
-    : IRepository<Booking>
+    : IRepository<Booking, int>
 {
-    IEnumerable<Booking> GetTodaysBookings();
+    IEnumerable<Booking>? GetTodaysBookings();
 }
