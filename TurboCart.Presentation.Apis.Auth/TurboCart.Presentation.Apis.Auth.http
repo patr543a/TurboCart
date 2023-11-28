@@ -1,0 +1,6 @@
+@TurboCart.Presentation.Apis.Auth_HostAddress = http://localhost:5199
+
+GET {{TurboCart.Presentation.Apis.Auth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
