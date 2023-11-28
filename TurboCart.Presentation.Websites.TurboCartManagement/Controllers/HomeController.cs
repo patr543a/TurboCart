@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TurboCart.Domain.Entities;
 using TurboCart.Presentation.Websites.TurboCartManagement.Models;
 
 namespace TurboCart.Presentation.Websites.TurboCartManagement.Controllers;
@@ -15,7 +16,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var model = new List<Booking> {
+            new Booking { BookingId = 1, Start = DateTime.Now, CustomerId = 1, Customer = new Customer() { CustomerId = 1, Name = "Sean" } },
+            new Booking { BookingId = 2, Start = DateTime.Now, CustomerId = 2, Customer = new Customer() { CustomerId = 2, Name = "Dave" } }
+        };
+
+        return View(model);
     }
 
     public IActionResult Privacy()
