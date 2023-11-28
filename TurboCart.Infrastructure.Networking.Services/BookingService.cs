@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using TurboCart.Application.Interfaces;
+﻿using TurboCart.Application.Interfaces;
 using TurboCart.Domain.Entities;
 
 namespace TurboCart.Infrastructure.Networking.Services;
