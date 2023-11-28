@@ -5,7 +5,7 @@ using TurboCart.Application.UseCases;
 
 namespace TurboCart.Tests.UoWRazorTestApp.Pages;
 
-public class IndexModel(ILogger<IndexModel> _logger, IBookingUseCase _bookingUseCase) : PageModel
+public class IndexModel(IBookingUseCase _bookingUseCase) : PageModel
 {
     public IBookingUseCase BookingUseCase => _bookingUseCase;
 
