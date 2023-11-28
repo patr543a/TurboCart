@@ -4,7 +4,11 @@ namespace TurboCart.Application.Interfaces;
 
 public interface IBookingUseCase
 {
-    void BookNew(DateTime dateTime, Customer customer);
-    IEnumerable<Booking> GetAllBookings();
-    IEnumerable<Booking> GetTodaysBookings();
+    Task<Booking?> AddBooking(Booking booking);
+    Task<Booking?> UpdateBooking(Booking booking);
+    Task<int?> DeleteBooking(int bookingId);
+    Task<bool?> IsValidBooking(Booking booking);
+    Task<Booking?> GetBooking(int bookingId);
+    Task<IEnumerable<Booking>?> GetAllBookings();
+    Task<IEnumerable<Booking>?> GetTodaysBookings();
 }
