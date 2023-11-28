@@ -14,11 +14,23 @@ public class TurboCartContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .Entity<Customer>()
-                .HasMany(c => c.Bookings)
-                    .WithOne(b => b.Customer)
-                        .HasForeignKey(b => b.CustomerId)
-                        .HasPrincipalKey(c => c.CustomerId);
+        modelBuilder.Entity<Customer>(c =>
+        {
+            c.Property(c => c.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            c.HasMany(c => c.Bookings)
+                .WithOne(b => b.Customer)
+                    .HasForeignKey(b => b.CustomerId)
+                    .HasPrincipalKey(c => c.CustomerId)
+                    .IsRequired();
+        });
+
+        modelBuilder.Entity<Booking>(b =>
+        {
+            b.Property(b => b.Start)
+                .IsRequired();
+        });
     }
 }
