@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace TurboCart.Domain.Entities;
+﻿namespace TurboCart.Domain.Entities;
 
 public class Booking
 {
