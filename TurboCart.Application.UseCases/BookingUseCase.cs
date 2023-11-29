@@ -12,7 +12,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
     public async Task<bool?> IsValidBooking(Booking booking)
 
     {
-        if (booking.Start < DateTime.Now)
+        if (booking.Start > DateTime.Today)
             return false;
 
         if (booking.Customer is null && booking.CustomerId == 0)

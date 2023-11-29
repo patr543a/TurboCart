@@ -23,14 +23,22 @@ public class UserUseCase(ITurboCartUnitOfWork _unitOfWork)
         return user;
     }
 
-    public Task<bool?> Authenticate(string username, string password)
+    public async Task<bool?> Authenticate(string username, string password)
     {
-        throw new NotImplementedException();
+        _unitOfWork
+            .UserRepository
+                .Authenticate(username, password);
+
+        return true;
     }
 
-    public Task<bool?> DeleteUser(string username, string password)
+    public async Task<bool?> DeleteUser(string username, string password)
     {
-        throw new NotImplementedException();
+        _unitOfWork
+            .UserRepository
+                .DeleteUser(username, password);
+
+        return true;
     }
 
     public async Task<bool?> IsValidUser(User user)
@@ -44,9 +52,13 @@ public class UserUseCase(ITurboCartUnitOfWork _unitOfWork)
         return true;
     }
 
-    public Task<User?> UpdateUser(string username, string password, User user)
+    public async Task<User?> UpdateUser(string username, string password, User user)
     {
-        throw new NotImplementedException();
+        _unitOfWork
+            .UserRepository
+                .UpdateUser(username, password, user);
+
+        return user;
     }
 }
 

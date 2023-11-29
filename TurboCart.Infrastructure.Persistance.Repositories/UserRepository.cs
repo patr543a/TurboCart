@@ -12,7 +12,7 @@ public class UserRepository(DbContext _dbContext)
         var user = GetById(username);
 
         if (user is null || user.Password != password)
-            throw new RepositoryException("Authentication failed");
+            throw new AuthenticationException("Authentication failed");
     }
 
     public void DeleteUser(string username, string password)
@@ -23,15 +23,32 @@ public class UserRepository(DbContext _dbContext)
 
             Delete(username);
         }
+        catch (AuthenticationException ex)
+        {
+            throw new AuthenticationException("Authentication failed", ex);
+        }
         catch (Exception ex)
         {
-            throw new Exception("Authentication failed", ex);
+            throw new Exception("Could not delete", ex);
         }
     }
 
     public void UpdateUser(string username, string password, User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Authenticate(username, password);
+
+            Update(user);
+        }
+        catch (AuthenticationException ex)
+        {
+            throw new AuthenticationException("Authentication failed", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Could not update", ex);
+        }
     }
 
     protected override string GetEntityId(User entity)
