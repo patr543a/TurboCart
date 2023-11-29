@@ -17,6 +17,14 @@ public class BookingController(IBookingUseCase _bookingUseCase)
         return Ok(bookings ?? []);
     }
 
+    [HttpGet("Today")]
+    public async Task<ActionResult<IEnumerable<Booking>>> GetTodaysBookings()
+    {
+        var bookings = await _bookingUseCase.GetTodaysBookings();
+
+        return Ok(bookings ?? []);
+    }
+
     [HttpGet("{bookingId}")]
     public async Task<ActionResult<Booking>> GetBooking(int bookingId)
     {
