@@ -10,11 +10,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
     : IBookingUseCase
 {
     public async Task<bool?> IsValidBooking(Booking booking)
-
     {
-        if (booking.Start > DateTime.Today - new TimeSpan(1, 0, 0, 0, 0, 0))
-            return false;
-
         if (booking.Customer is null && booking.CustomerId == 0)
             return false;
 
