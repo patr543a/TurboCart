@@ -12,7 +12,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
     public async Task<bool?> IsValidBooking(Booking booking)
 
     {
-        if (booking.Start > DateTime.Today)
+        if (booking.Start > DateTime.Today - new TimeSpan(1, 0, 0, 0, 0, 0))
             return false;
 
         if (booking.Customer is null && booking.CustomerId == 0)
@@ -24,12 +24,12 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
     public async Task<Booking?> GetBooking(int bookingId)
         => _unitOfWork
             .BookingRepository
-                .GetById(bookingId);
+                .GetById(bookingId, includes: "Customer");
 
     public async Task<IEnumerable<Booking>?> GetAllBookings()
         => _unitOfWork
             .BookingRepository
-                .GetAll();
+                .GetAll(includes: "Customer");
 
 
     public async Task<IEnumerable<Booking>?> GetTodaysBookings()

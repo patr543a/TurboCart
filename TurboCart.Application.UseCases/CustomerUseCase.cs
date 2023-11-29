@@ -23,7 +23,7 @@ public class CustomerUseCase(ITurboCartUnitOfWork _unitOfWork)
     public async Task<Customer?> GetCustomer(int customerId)
         => _unitOfWork
             .CustomerRepository
-                .GetById(customerId, "Bookings");
+                .GetById(customerId);
 
     public async Task<Customer?> AddCustomer(Customer customer)
     {
