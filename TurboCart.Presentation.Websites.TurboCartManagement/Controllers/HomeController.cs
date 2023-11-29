@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TurboCart.Application.Interfaces;
 using TurboCart.Domain.Entities;
 using TurboCart.Presentation.Websites.TurboCartManagement.Models;
 
@@ -8,21 +9,32 @@ namespace TurboCart.Presentation.Websites.TurboCartManagement.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IBookingUseCase _bookingUseCase;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase)
     {
         _logger = logger;
+        _bookingUseCase = bookingUseCase;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var model = new List<Booking> {
-            new Booking { BookingId = 1, Start = DateTime.Now, CustomerId = 1, Customer = new Customer() { CustomerId = 1, Name = "Sean" } },
-            new Booking { BookingId = 2, Start = DateTime.Now, CustomerId = 2, Customer = new Customer() { CustomerId = 2, Name = "Dave" } }
-        };
-
+        var model = await _bookingUseCase.GetAllBookings();
         return View(model);
     }
+
+    public async Task<IActionResult> Today() {
+        var model = await _bookingUseCase.GetTodaysBookings();
+        return View("Index", model);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Details(int id) {
+        var model = await _bookingUseCase.GetBooking(id);
+        return View(model);
+    }
+
+
 
     public IActionResult Privacy()
     {

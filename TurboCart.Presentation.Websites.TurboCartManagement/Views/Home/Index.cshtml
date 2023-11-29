@@ -18,9 +18,9 @@
         <tbody>
             @foreach(var booking in Model) {
                 <tr>
-                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
-                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.Start </a></td>
-                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
+                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
+                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start </a></td>
+                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
                 </tr>
             }
         </tbody>
