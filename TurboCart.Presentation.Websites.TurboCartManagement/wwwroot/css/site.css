@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Used to make links take up the entire row in a table */
+td {
+    padding: 0 !important;
+}
+td a {
+    display: block;
+    height: 100%;
+    padding: 0.5rem;
+    color: unset;
+    text-decoration: unset;
+}
+td a:hover {
+    color: unset;
+}

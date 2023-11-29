@@ -1,8 +1,29 @@
-﻿@{
+﻿@model IEnumerable<TurboCart.Domain.Entities.Booking>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bookings</h1>
+</div>
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Dato</th>
+                <th scope="col">Customer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var booking in Model) {
+                <tr>
+                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
+                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.Start </a></td>
+                    <td><a href="#?id=@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="#">Opret Ny Booking</a>
 </div>

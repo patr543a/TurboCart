@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TurboCart.Aspire\TurboCart.Aspire.ServiceDefaults\TurboCart.Aspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\TurboCart.Domain.Entities\TurboCart.Domain.Entities.csproj" />
   </ItemGroup>
 
 </Project>
