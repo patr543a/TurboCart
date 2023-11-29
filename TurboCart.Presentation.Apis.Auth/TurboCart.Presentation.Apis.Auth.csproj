@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TurboCart.Application.Interfaces\TurboCart.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\TurboCart.Application.UseCases\TurboCart.Application.UseCases.csproj" />
     <ProjectReference Include="..\TurboCart.Aspire\TurboCart.Aspire.ServiceDefaults\TurboCart.Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\TurboCart.Domain.Entities\TurboCart.Domain.Entities.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.Contexts\TurboCart.Infrastructure.Persistance.Contexts.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.Repositories\TurboCart.Infrastructure.Persistance.Repositories.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistance.UnitsOfWork\TurboCart.Infrastructure.Persistance.UnitOfWorks.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Persistence.Interfaces\TurboCart.Infrastructure.Persistence.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
