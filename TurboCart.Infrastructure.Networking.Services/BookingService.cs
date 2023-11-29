@@ -23,8 +23,14 @@ public class BookingService
     public async Task<Booking?> GetBooking(int bookingId)
         => await GetFromJsonAsync<Booking>($"api/Booking/{bookingId}");
 
+    public async Task<IEnumerable<Booking>?> GetBookingsForDate(DateOnly date)
+        => await GetFromJsonAsync<IEnumerable<Booking>>($"api/Booking/Date/{date}");
+
+    public async Task<IEnumerable<Booking>?> GetThisWeeksBookings()
+        => await GetFromJsonAsync<IEnumerable<Booking>>("api/Booking/Week");
+
     public async Task<IEnumerable<Booking>?> GetTodaysBookings()
-        => await GetFromJsonAsync<IEnumerable<Booking>>($"api/Booking/Today");
+        => await GetFromJsonAsync<IEnumerable<Booking>>("api/Booking/Today");
 
     public async Task<bool?> IsValidBooking(Booking booking)
         => throw new NotImplementedException();

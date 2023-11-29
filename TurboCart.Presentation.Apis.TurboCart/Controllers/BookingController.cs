@@ -25,6 +25,22 @@ public class BookingController(IBookingUseCase _bookingUseCase)
         return Ok(bookings ?? []);
     }
 
+    [HttpGet("Date/{date}")]
+    public async Task<ActionResult<IEnumerable<Booking>>> GetBookingsForDate(DateOnly date)
+    {
+        var bookings = await _bookingUseCase.GetBookingsForDate(date);
+
+        return Ok(bookings ?? []);
+    }
+
+    [HttpGet("Week")]
+    public async Task<ActionResult<IEnumerable<Booking>>> GetThisWeeksBookings()
+    {
+        var bookings = await _bookingUseCase.GetThisWeeksBookings();
+
+        return Ok(bookings ?? []);
+    }
+
     [HttpGet("{bookingId}")]
     public async Task<ActionResult<Booking>> GetBooking(int bookingId)
     {

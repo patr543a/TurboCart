@@ -6,4 +6,6 @@ public interface IBookingRepository
     : IRepository<Booking, int>
 {
     IEnumerable<Booking>? GetTodaysBookings();
+    IEnumerable<Booking>? GetBookingsForDate(DateOnly date);
+    IEnumerable<Booking>? GetThisWeeksBookings();
 }

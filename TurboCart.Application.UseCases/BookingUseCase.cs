@@ -37,6 +37,16 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
             .BookingRepository
                 .GetTodaysBookings();
 
+    public async Task<IEnumerable<Booking>?> GetBookingsForDate(DateOnly date)
+        => _unitOfWork
+            .BookingRepository
+                .GetBookingsForDate(date);
+
+    public async Task<IEnumerable<Booking>?> GetThisWeeksBookings()
+        => _unitOfWork
+            .BookingRepository
+                .GetThisWeeksBookings();
+
     public async Task<Booking?> AddBooking(Booking booking)
     {
         if (!await IsValidBooking(booking) ?? false)

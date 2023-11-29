@@ -11,4 +11,6 @@ public interface IBookingUseCase
     Task<Booking?> GetBooking(int bookingId);
     Task<IEnumerable<Booking>?> GetAllBookings();
     Task<IEnumerable<Booking>?> GetTodaysBookings();
+    Task<IEnumerable<Booking>?> GetBookingsForDate(DateOnly date);
+    Task<IEnumerable<Booking>?> GetThisWeeksBookings();
 }
