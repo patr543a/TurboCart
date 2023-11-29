@@ -24,7 +24,7 @@ public class BookingService
         => await GetFromJsonAsync<Booking>($"api/Booking/{bookingId}");
 
     public async Task<IEnumerable<Booking>?> GetTodaysBookings()
-        => throw new NotImplementedException();
+        => await GetFromJsonAsync<IEnumerable<Booking>>($"api/Booking/Today");
 
     public async Task<bool?> IsValidBooking(Booking booking)
         => throw new NotImplementedException();
