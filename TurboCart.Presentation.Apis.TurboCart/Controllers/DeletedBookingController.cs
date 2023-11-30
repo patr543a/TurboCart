@@ -34,7 +34,7 @@ public class DeletedBookingController(IDeletedBookingUseCase _deletedBookingUseC
     }
 
     [HttpPost]
-    public async Task<ActionResult<Booking>> PostDeletedBooking([FromBody] DeletedBooking deletedBooking)
+    public async Task<ActionResult<DeletedBooking>> PostDeletedBooking([FromBody] DeletedBooking deletedBooking)
     {
         try
         {
