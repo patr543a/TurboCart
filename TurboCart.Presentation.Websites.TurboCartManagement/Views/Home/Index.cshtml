@@ -1,28 +1,32 @@
 ﻿@model IEnumerable<TurboCart.Domain.Entities.Booking>
 @{
     ViewData["Title"] = "Home Page";
+    string datetimePattern = "yyyy-MM-dd"; //used internally
+    var datetimeCulture = new System.Globalization.CultureInfo("da-DK"); //displayed on page
+
     string route = Context.Request.Path.ToString();
     route = route.Substring(route.LastIndexOf('/') + 1);
 
     string title;
     DateOnly date = DateOnly.FromDateTime(DateTime.Today);
 
-    switch (route) {
+    switch (route)
+    {
         case "":
-            title = "Bookings for today";
+            title = "Bookings for i dag";
             break;
         case "week":
-            title = "Bookings for this week";
+            title = "Bookings for denne uge";
             break;
         case "all":
-            title = "All Bookings";
+            title = "Alle bookings";
             break;
         default:
-            if (DateOnly.TryParse(route, out date)) {
-                title = "Bookings for " + date;
+            if (DateOnly.TryParseExact(route, datetimePattern, out date)) {
+                title = "Bookings for " + date.ToString(datetimeCulture);
             }
             else {
-                title = "Bookings for today";
+                title = "Bookings for i dag";
             }
             break;
     }
@@ -36,34 +40,34 @@
 </div>
 <div>
     <div class="btn-group me-3">
-        <a asp-action="Index" class="btn btn-outline-primary">Today</a>
-        <a asp-action="ListThisWeek" class="btn btn-outline-primary">This Week</a>
-        <a asp-action="ListAll" class="btn btn-outline-primary">All</a>
+        <a asp-action="Index" class="btn btn-outline-primary">I dag</a>
+        <a asp-action="ListThisWeek" class="btn btn-outline-primary">Denne uge</a>
+        <a asp-action="ListAll" class="btn btn-outline-primary">Alle</a>
     </div>
     <div class="btn-group me-3">
-        <a asp-action="ListDay" asp-route-date="@previousDay" class="btn btn-outline-primary">Previous Day</a>
-        <a asp-action="ListDay" asp-route-date="@nextDay" class="btn btn-outline-primary">Next Day</a>
+        <a asp-action="ListDay" asp-route-date="@previousDay.ToString(datetimePattern)" class="btn btn-outline-primary">Tilbage</a>
+        <a asp-action="ListDay" asp-route-date="@nextDay.ToString(datetimePattern)" class="btn btn-outline-primary">Næste</a>
     </div>
 
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Customer</th>
+                <th scope="col">Dato</th>
+                <th scope="col">Tid</th>
+                <th scope="col">Kunde</th>
             </tr>
         </thead>
         <tbody>
             @foreach(var booking in Model) {
                 <tr>
                     <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToShortDateString() </a></td>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToShortTimeString() </a></td>
+                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("dddd, dd MMMM yyyy", datetimeCulture) </a></td>
+                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("t", datetimeCulture) </a></td>
                     <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
                 </tr>
             }
         </tbody>
     </table>
-    <a class="btn btn-primary" asp-action="CreateNew">Create New Booking</a>
+    <a class="btn btn-primary" asp-action="CreateNew">Opret ny booking</a>
 </div>

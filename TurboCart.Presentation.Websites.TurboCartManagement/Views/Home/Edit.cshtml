@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Rediger</h1>
 
 <h4>Booking</h4>
 <hr />
@@ -15,12 +15,12 @@
             <input asp-for="BookingId" type="hidden"/>
 
             <div class="form-group mb-3">
-                <label asp-for="Date" class="control-label">Date</label>
+                <label asp-for="Date" class="control-label">Dato</label>
                 <input asp-for="Date" type="date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Time" class="control-label">Time</label>
+                <label asp-for="Time" class="control-label">Tid</label>
                 <input asp-for="Time" type="time" class="form-control" />
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
@@ -31,19 +31,19 @@
                     <option value="1">Name</option>
                 </select>-->
 
-                <label asp-for="CustomerId" class="control-label">Customer Id</label>
+                <label asp-for="CustomerId" class="control-label">Kunde Id</label>
                 <input asp-for="CustomerId" type="number" class="form-control" />
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-route-id="@Model.BookingId">Tilbage til booking</a>
 </div>
 
 @section Scripts {

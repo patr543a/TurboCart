@@ -43,8 +43,6 @@ public class HomeController : Controller
     }
 
 
-
-
     [HttpGet("details/{id}")]
     public async Task<IActionResult> Details(int id)
     {
@@ -54,6 +52,7 @@ public class HomeController : Controller
         }
         return View(model);
     }
+
 
     [HttpGet("new")]
     public IActionResult CreateNew()
@@ -79,6 +78,7 @@ public class HomeController : Controller
 
         return Redirect("/");
     }
+
 
     [HttpGet("edit/{id}")]
     public async Task<IActionResult> Edit(int id)
@@ -122,15 +122,42 @@ public class HomeController : Controller
     }
 
 
+    [HttpGet("delete/{id}")]
+    public IActionResult Delete(int id) {
+        var model = new DeleteReasonViewModel() {
+            BookingId = id
+        };
 
-    public IActionResult Privacy()
-    {
+        return View(model);
+    }
+
+    [HttpPost("delete/{id}")]
+    public async Task<IActionResult> Delete(DeleteReasonViewModel deleteReasonViewModel) {
+        string reason = deleteReasonViewModel.Reason;
+        if (deleteReasonViewModel.Reason == "") {
+            reason = deleteReasonViewModel.DetailedReason;
+        }
+
+        var result = await _bookingUseCase.DeleteBooking(deleteReasonViewModel.BookingId, reason);
+        if (result == null) {
+            return BadRequest();
+        }
+
+        return Redirect("/");
+    }
+
+
+    public IActionResult Login() {
+        return View();
+    }
+
+
+    public IActionResult Privacy() {
         return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
+    public IActionResult Error() {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
