@@ -22,6 +22,7 @@ builder.Services.AddTransient<IDeletedBookingRepository, DeletedBookingRepositor
 builder.Services.AddTransient<ITurboCartUnitOfWork, TurboCartUnitOfWork>();
 builder.Services.AddTransient<IBookingUseCase, BookingUseCase>();
 builder.Services.AddTransient<ICustomerUseCase, CustomerUseCase>();
+builder.Services.AddTransient<IDeletedBookingUseCase, DeletedBookingUseCase>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

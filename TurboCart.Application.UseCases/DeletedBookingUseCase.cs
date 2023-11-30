@@ -20,6 +20,8 @@ public class DeletedBookingUseCase(ITurboCartUnitOfWork _unitOfWork)
             .DeletedBookingRepository
                 .Add(deletedBooking);
 
+        _unitOfWork.Commit();
+
         return deletedBooking;
     }
 
