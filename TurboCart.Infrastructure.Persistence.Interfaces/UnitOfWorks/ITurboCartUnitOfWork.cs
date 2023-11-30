@@ -8,4 +8,5 @@ public interface ITurboCartUnitOfWork
     IBookingRepository BookingRepository { get; }
     ICustomerRepository CustomerRepository { get; }
     IUserRepository UserRepository { get; }
+    IDeletedBookingRepository DeletedBookingRepository { get; }
 }

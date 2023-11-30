@@ -12,7 +12,7 @@ using TurboCart.Infrastructure.Persistance.Contexts;
 namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 {
     [DbContext(typeof(TurboCartContext))]
-    [Migration("20231128104916_TurboCartDB")]
+    [Migration("20231130084745_TurboCartDB")]
     partial class TurboCartDB
     {
         /// <inheritdoc />
@@ -44,6 +44,14 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            BookingId = 1,
+                            CustomerId = 1,
+                            Start = new DateTime(2023, 11, 30, 9, 47, 45, 57, DateTimeKind.Local).AddTicks(9759)
+                        });
                 });
 
             modelBuilder.Entity("TurboCart.Domain.Entities.Customer", b =>
@@ -62,6 +70,42 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            Name = "TestCustomer"
+                        });
+                });
+
+            modelBuilder.Entity("TurboCart.Domain.Entities.DeletedBooking", b =>
+                {
+                    b.Property<int>("DeletedBookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeletedBookingId"));
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DeletedBookingId");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
+                    b.ToTable("DeletedBooking");
                 });
 
             modelBuilder.Entity("TurboCart.Domain.Entities.User", b =>
@@ -78,6 +122,13 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Username = "admin",
+                            Password = "1234"
+                        });
                 });
 
             modelBuilder.Entity("TurboCart.Domain.Entities.Booking", b =>
@@ -85,6 +136,17 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                     b.HasOne("TurboCart.Domain.Entities.Customer", "Customer")
                         .WithMany("Bookings")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TurboCart.Domain.Entities.DeletedBooking", b =>
+                {
+                    b.HasOne("TurboCart.Domain.Entities.Customer", "Customer")
+                        .WithOne()
+                        .HasForeignKey("TurboCart.Domain.Entities.DeletedBooking", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -18,6 +18,7 @@ builder.Services.AddDbContext<DbContext, TurboCartContext>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IDeletedBookingRepository, DeletedBookingRepository>();
 builder.Services.AddTransient<ITurboCartUnitOfWork, TurboCartUnitOfWork>();
 builder.Services.AddTransient<IBookingUseCase, BookingUseCase>();
 builder.Services.AddTransient<ICustomerUseCase, CustomerUseCase>();

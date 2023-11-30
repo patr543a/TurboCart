@@ -26,12 +26,28 @@ public class TurboCartContext
                     .HasForeignKey(b => b.CustomerId)
                     .HasPrincipalKey(c => c.CustomerId)
                     .IsRequired();
+
+            c.HasData(
+                new Customer()
+                {
+                    CustomerId = 1,
+                    Name = "TestCustomer",
+                    Bookings = [],
+                });
         });
 
         modelBuilder.Entity<Booking>(b =>
         {
             b.Property(b => b.Start)
                 .IsRequired();
+
+            b.HasData(
+                new Booking()
+                {
+                    BookingId = 1,
+                    Start = DateTime.Now,
+                    CustomerId = 1,
+                });
         });
 
         modelBuilder.Entity<User>(u =>
@@ -45,6 +61,32 @@ public class TurboCartContext
             u.Property(u => u.Password)
                 .HasMaxLength(20)
                 .IsRequired();
+
+            u.HasData(
+                new User()
+                {
+                    Username = "admin",
+                    Password = "1234",
+                });
+        });
+
+        modelBuilder.Entity<DeletedBooking>(d =>
+        {
+            d.Property(b => b.BookingId)
+                .IsRequired();
+
+            d.Property(b => b.CustomerId)
+                .IsRequired();
+
+            d.Property(b => b.Start)
+                .IsRequired();
+
+            d.Property(b => b.Reason)
+                .IsRequired();
+            
+            d.HasOne(d => d.Customer)
+                .WithOne()
+                    .IsRequired();
         });
     }
 }

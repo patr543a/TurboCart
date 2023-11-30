@@ -8,10 +8,12 @@ public class TurboCartUnitOfWork(
     DbContext _dbContext,
     IBookingRepository _bookingRepository,
     ICustomerRepository _customerRepository,
-    IUserRepository _userRepository)
+    IUserRepository _userRepository,
+    IDeletedBookingRepository _deletedBookingRepository)
     : UnitOfWorkBase(_dbContext), ITurboCartUnitOfWork
 {
     public IBookingRepository BookingRepository => _bookingRepository;
     public ICustomerRepository CustomerRepository => _customerRepository;
     public IUserRepository UserRepository => _userRepository;
+    public IDeletedBookingRepository DeletedBookingRepository => _deletedBookingRepository;
 }

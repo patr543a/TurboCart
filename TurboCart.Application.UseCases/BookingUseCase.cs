@@ -71,11 +71,20 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
         return booking;
     }
 
-    public async Task<int?> DeleteBooking(int bookingId)
+    public async Task<int?> DeleteBooking(int bookingId, string reason)
     {
+        var booking = _unitOfWork
+            .BookingRepository
+                .GetById(bookingId) 
+                    ?? throw new Exception("Not found");
+
+        _unitOfWork
+            .DeletedBookingRepository
+                .AddDeletedBooking(booking, reason);
+
         _unitOfWork
             .BookingRepository
-                .Delete(bookingId);
+                .Delete(booking);
 
         _unitOfWork.Commit();
 

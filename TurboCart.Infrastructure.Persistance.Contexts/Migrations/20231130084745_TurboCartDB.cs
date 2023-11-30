@@ -56,10 +56,53 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DeletedBooking",
+                columns: table => new
+                {
+                    DeletedBookingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingId = table.Column<int>(type: "int", nullable: false),
+                    Start = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeletedBooking", x => x.DeletedBookingId);
+                    table.ForeignKey(
+                        name: "FK_DeletedBooking_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "CustomerId", "Name" },
+                values: new object[] { 1, "TestCustomer" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Username", "Password" },
+                values: new object[] { "admin", "1234" });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "BookingId", "CustomerId", "Start" },
+                values: new object[] { 1, 1, new DateTime(2023, 11, 30, 9, 47, 45, 57, DateTimeKind.Local).AddTicks(9759) });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_CustomerId",
                 table: "Bookings",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeletedBooking_CustomerId",
+                table: "DeletedBooking",
+                column: "CustomerId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -67,6 +110,9 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Bookings");
+
+            migrationBuilder.DropTable(
+                name: "DeletedBooking");
 
             migrationBuilder.DropTable(
                 name: "Users");
