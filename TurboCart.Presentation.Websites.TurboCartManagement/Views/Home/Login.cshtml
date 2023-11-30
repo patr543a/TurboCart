@@ -1,20 +1,30 @@
-﻿@{
+﻿@model TurboCart.Presentation.Websites.TurboCartManagement.Models.LoginViewModel
+
+@{
     ViewData["Title"] = "Login";
 }
 
 <h1>Log ind</h1>
 
 <div class="form-signin">
-    <form>
+    <form method="post">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="Brugenavn">
-            <label for="floatingInput">Brugenavn</label>
+            <input asp-for="Username" class="form-control" placeholder="Brugenavn">
+            <label asp-for="Username">Brugenavn</label>
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Kodeord">
-            <label for="floatingPassword">Kodeord</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Kodeord">
+            <label asp-for="Password">Kodeord</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <button class="btn btn-lg btn-primary" type="submit">Log ind</button>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -10,11 +10,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IBookingUseCase _bookingUseCase;
+    private readonly IUserUseCase _userUseCase;
 
-    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase)
+    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase, IUserUseCase userUseCase)
     {
         _logger = logger;
         _bookingUseCase = bookingUseCase;
+        _userUseCase = userUseCase;
     }
 
     public async Task<IActionResult> Index()
@@ -48,7 +50,7 @@ public class HomeController : Controller
     {
         var model = await _bookingUseCase.GetBooking(id);
         if (model == null) {
-            return NotFound($"Booking with id {id} could not be found");
+            return NotFound($"Booking med id {{id}} kunne ikke findes");
         }
         return View(model);
     }
@@ -63,7 +65,7 @@ public class HomeController : Controller
     [HttpPost("new")]
     public async Task<IActionResult> CreateNew(BookingViewModel bookingViewModel) {
         if (!ModelState.IsValid) {
-            return BadRequest();
+            return BadRequest("Alle felter er påkrævet");
         }
 
         Booking b = new() {
@@ -73,7 +75,7 @@ public class HomeController : Controller
         };
         var result = await _bookingUseCase.AddBooking(b);
         if (result == null) {
-            return BadRequest();
+            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
         }
 
         return Redirect("/");
@@ -85,7 +87,7 @@ public class HomeController : Controller
     {
         var b = await _bookingUseCase.GetBooking(id);
         if (b == null) {
-            return NotFound($"Booking with id {id} could not be found");
+            return NotFound($"Booking med id {id} kunne ikke findes");
         }
 
         var model = new BookingViewModel()
@@ -104,7 +106,7 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest();
+            return BadRequest("Alle felter er påkrævet");
         }
         Booking b = new()
         {
@@ -115,7 +117,7 @@ public class HomeController : Controller
 
         var result = await _bookingUseCase.UpdateBooking(b);
         if (result == null) {
-            return BadRequest();
+            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
         }
 
         return Redirect("/");
@@ -140,15 +142,34 @@ public class HomeController : Controller
 
         var result = await _bookingUseCase.DeleteBooking(deleteReasonViewModel.BookingId, reason);
         if (result == null) {
-            return BadRequest();
+            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
         }
 
         return Redirect("/");
     }
 
-
+    [HttpGet("login")]
     public IActionResult Login() {
         return View();
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginViewModel loginViewModel) {
+        if (!ModelState.IsValid) {
+            return BadRequest("Brugernavn og kodeord er påkrævet");
+        }
+
+        bool? result = await _userUseCase.Authenticate(loginViewModel.Username, loginViewModel.Password);
+        if (result == null) {
+            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
+        }
+        if (result == false) {
+            return BadRequest("Brugernavn eller kodeord er fokert");
+        }
+
+        //TODO: log the user in
+
+        return Redirect("/");
     }
 
 
