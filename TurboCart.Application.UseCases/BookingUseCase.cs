@@ -71,16 +71,18 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
         return booking;
     }
 
-    public async Task<string?> DeleteBooking(int bookingId, string reason)
+    public async Task<DeletedBooking?> DeleteBooking(DeletedBooking deletedBooking)
     {
+        ArgumentNullException.ThrowIfNull(deletedBooking.Reason);
+
         var booking = _unitOfWork
             .BookingRepository
-                .GetById(bookingId) 
+                .GetById(deletedBooking.BookingId) 
                     ?? throw new Exception("Not found");
 
         _unitOfWork
             .DeletedBookingRepository
-                .AddDeletedBooking(booking, reason);
+                .AddDeletedBooking(booking, deletedBooking.Reason);
 
         _unitOfWork
             .BookingRepository
@@ -88,7 +90,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
 
         _unitOfWork.Commit();
 
-        return reason;
+        return deletedBooking;
     }
 }
 

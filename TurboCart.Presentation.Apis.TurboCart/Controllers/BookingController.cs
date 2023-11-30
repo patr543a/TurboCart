@@ -82,12 +82,14 @@ public class BookingController(IBookingUseCase _bookingUseCase)
         return Ok(booking);
     }
 
-    [HttpPost("{bookingId}")]
-    public async Task<ActionResult> DeleteBooking(int bookingId, string reason)
+    [HttpPost("Delete")]
+    public async Task<ActionResult> DeleteBooking(DeletedBooking deletedBooking)
     {
+        ArgumentNullException.ThrowIfNull(deletedBooking.Reason);
+
         try
         {
-            await _bookingUseCase.DeleteBooking(bookingId, reason);
+            await _bookingUseCase.DeleteBooking(deletedBooking);
         }
         catch
         {
