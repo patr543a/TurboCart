@@ -91,7 +91,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
             migrationBuilder.InsertData(
                 table: "Bookings",
                 columns: new[] { "BookingId", "CustomerId", "Start" },
-                values: new object[] { 1, 1, new DateTime(2023, 11, 30, 9, 47, 45, 57, DateTimeKind.Local).AddTicks(9759) });
+                values: new object[] { 1, 1, new DateTime(2023, 11, 30, 11, 47, 11, 423, DateTimeKind.Local).AddTicks(3859) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_CustomerId",
@@ -101,8 +101,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DeletedBooking_CustomerId",
                 table: "DeletedBooking",
-                column: "CustomerId",
-                unique: true);
+                column: "CustomerId");
         }
 
         /// <inheritdoc />

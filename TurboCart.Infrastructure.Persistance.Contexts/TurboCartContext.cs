@@ -85,7 +85,7 @@ public class TurboCartContext
                 .IsRequired();
             
             d.HasOne(d => d.Customer)
-                .WithOne()
+                .WithMany()
                     .IsRequired();
         });
     }

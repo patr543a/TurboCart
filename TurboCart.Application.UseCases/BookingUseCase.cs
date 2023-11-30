@@ -71,7 +71,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
         return booking;
     }
 
-    public async Task<int?> DeleteBooking(int bookingId, string reason)
+    public async Task<string?> DeleteBooking(int bookingId, string reason)
     {
         var booking = _unitOfWork
             .BookingRepository
@@ -88,7 +88,7 @@ public class BookingUseCase(ITurboCartUnitOfWork _unitOfWork)
 
         _unitOfWork.Commit();
 
-        return bookingId;
+        return reason;
     }
 }
 

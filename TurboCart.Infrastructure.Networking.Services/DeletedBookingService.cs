@@ -14,7 +14,7 @@ public class DeletedBookingService
         => PostAsJsonAsync<DeletedBooking>("api/DeletedBooking", new(booking, reason));
 
     public Task<DeletedBooking?> AddDeletedBooking(DeletedBooking deletedBooking)
-        => PostAsJsonAsync<DeletedBooking>("api/DeletedBooking", deletedBooking);
+        => PostAsJsonAsync("api/DeletedBooking", deletedBooking);
 
     public Task<DeletedBooking?> GetDeletedBooking(int deletedBookingId)
         => GetFromJsonAsync<DeletedBooking>($"api/DeletedBooking/{deletedBookingId}");

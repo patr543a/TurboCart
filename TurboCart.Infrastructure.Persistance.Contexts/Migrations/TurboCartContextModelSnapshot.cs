@@ -47,7 +47,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                         {
                             BookingId = 1,
                             CustomerId = 1,
-                            Start = new DateTime(2023, 11, 30, 9, 47, 45, 57, DateTimeKind.Local).AddTicks(9759)
+                            Start = new DateTime(2023, 11, 30, 11, 47, 11, 423, DateTimeKind.Local).AddTicks(3859)
                         });
                 });
 
@@ -99,8 +99,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 
                     b.HasKey("DeletedBookingId");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("DeletedBooking");
                 });
@@ -142,8 +141,8 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
             modelBuilder.Entity("TurboCart.Domain.Entities.DeletedBooking", b =>
                 {
                     b.HasOne("TurboCart.Domain.Entities.Customer", "Customer")
-                        .WithOne()
-                        .HasForeignKey("TurboCart.Domain.Entities.DeletedBooking", "CustomerId")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

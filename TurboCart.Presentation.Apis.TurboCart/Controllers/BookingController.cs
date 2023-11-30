@@ -82,7 +82,7 @@ public class BookingController(IBookingUseCase _bookingUseCase)
         return Ok(booking);
     }
 
-    [HttpDelete("{bookingId}/{reason}")]
+    [HttpPost("{bookingId}")]
     public async Task<ActionResult> DeleteBooking(int bookingId, string reason)
     {
         try
