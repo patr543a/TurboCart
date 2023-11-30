@@ -50,25 +50,30 @@
         <a asp-action="ListDay" asp-route-date="@nextDay.ToString(datetimePattern)" class="btn btn-outline-primary">Næste</a>
     </div>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Dato</th>
-                <th scope="col">Tid</th>
-                <th scope="col">Kunde</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var booking in Model) {
+    @if (Model.Count() > 1) {
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("dddd, dd MMMM yyyy", datetimeCulture) </a></td>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("t", datetimeCulture) </a></td>
-                    <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
+                    <th scope="col">#</th>
+                    <th scope="col">Dato</th>
+                    <th scope="col">Tid</th>
+                    <th scope="col">Kunde</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach(var booking in Model) {
+                    <tr>
+                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
+                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("dddd, dd MMMM yyyy", datetimeCulture) </a></td>
+                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("t", datetimeCulture) </a></td>
+                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else {
+        <h2>Der er ingen @title</h2>
+    }
     <a class="btn btn-primary" asp-action="CreateNew">Opret ny booking</a>
 </div>
