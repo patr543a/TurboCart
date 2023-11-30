@@ -6,7 +6,7 @@ public interface IBookingUseCase
 {
     Task<Booking?> AddBooking(Booking booking);
     Task<Booking?> UpdateBooking(Booking booking);
-    Task<DeletedBooking?> DeleteBooking(DeletedBooking deletedBooking);
+    Task<DeletedBooking?> DeleteBooking(int bookingId, string reason);
     Task<bool?> IsValidBooking(Booking booking);
     Task<Booking?> GetBooking(int bookingId);
     Task<IEnumerable<Booking>?> GetAllBookings();

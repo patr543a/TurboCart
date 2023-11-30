@@ -14,8 +14,8 @@ public class BookingService
     public async Task<Booking?> AddBooking(Booking booking)
         => await PostAsJsonAsync("api/Booking", booking);
 
-    public async Task<DeletedBooking?> DeleteBooking(DeletedBooking deletedBooking)
-        => await PostAsJsonAsync($"api/Booking/Delete", deletedBooking);
+    public async Task<DeletedBooking?> DeleteBooking(int bookingId, string reason)
+        => await PostAsJsonAsync($"api/Booking/{bookingId}", new DeletedBooking() { Reason = reason });
 
     public async Task<IEnumerable<Booking>?> GetAllBookings()
         => await GetFromJsonAsync<IEnumerable<Booking>>("api/Booking");
