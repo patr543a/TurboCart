@@ -10,13 +10,11 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IBookingUseCase _bookingUseCase;
-    private readonly IUserUseCase _userUseCase;
 
-    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase, IUserUseCase userUseCase)
+    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase)
     {
         _logger = logger;
         _bookingUseCase = bookingUseCase;
-        _userUseCase = userUseCase;
     }
 
     public async Task<IActionResult> Index()
@@ -144,32 +142,6 @@ public class HomeController : Controller
         if (result == null) {
             return BadRequest("Fik ugyldigt svar tilbage fra serveren");
         }
-
-        return Redirect("/");
-    }
-
-
-
-    [HttpGet("login")]
-    public IActionResult Login() {
-        return View();
-    }
-
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginViewModel loginViewModel) {
-        if (!ModelState.IsValid) {
-            return BadRequest("Brugernavn og kodeord er påkrævet");
-        }
-
-        bool? result = await _userUseCase.Authenticate(loginViewModel.Username, loginViewModel.Password);
-        if (result == null) {
-            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
-        }
-        if (result == false) {
-            return BadRequest("Brugernavn eller kodeord er fokert");
-        }
-
-        //TODO: log the user in
 
         return Redirect("/");
     }
