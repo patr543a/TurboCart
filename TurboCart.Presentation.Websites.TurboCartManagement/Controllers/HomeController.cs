@@ -19,19 +19,106 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var model = await _bookingUseCase.GetAllBookings();
+        var model = await _bookingUseCase.GetTodaysBookings();
         return View(model);
     }
-
-    public async Task<IActionResult> Today() {
-        var model = await _bookingUseCase.GetTodaysBookings();
+    
+    [HttpGet("{date}")]
+    public async Task<IActionResult> ListDay(DateOnly date) {
+        var model = await _bookingUseCase.GetBookingsForDate(date);
         return View("Index", model);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Details(int id) {
+    [HttpGet("week")]
+    public async Task<IActionResult> ListThisWeek() {
+        var model = await _bookingUseCase.GetThisWeeksBookings();
+        return View("Index", model);
+    }
+
+    [HttpGet("all")]
+    public async Task<IActionResult> ListAll()
+    {
+        var model = await _bookingUseCase.GetAllBookings();
+        return View("Index", model);
+    }
+
+
+
+
+    [HttpGet("details/{id}")]
+    public async Task<IActionResult> Details(int id)
+    {
         var model = await _bookingUseCase.GetBooking(id);
+        if (model == null) {
+            return NotFound($"Booking with id {id} could not be found");
+        }
         return View(model);
+    }
+
+    [HttpGet("new")]
+    public IActionResult CreateNew()
+    {
+        return View();
+    }
+
+    [HttpPost("new")]
+    public async Task<IActionResult> CreateNew(BookingViewModel bookingViewModel) {
+        if (!ModelState.IsValid) {
+            return BadRequest();
+        }
+
+        Booking b = new() {
+            BookingId = bookingViewModel.BookingId,
+            Start = new DateTime(bookingViewModel.Date, bookingViewModel.Time),
+            CustomerId = bookingViewModel.CustomerId
+        };
+        var result = await _bookingUseCase.AddBooking(b);
+        if (result == null) {
+            return BadRequest();
+        }
+
+        return Redirect("/");
+    }
+
+    [HttpGet("edit/{id}")]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var b = await _bookingUseCase.GetBooking(id);
+        if (b == null) {
+            return NotFound($"Booking with id {id} could not be found");
+        }
+
+        var model = new BookingViewModel()
+        {
+            BookingId = b.BookingId,
+            Date = DateOnly.FromDateTime(b.Start),
+            Time = TimeOnly.FromDateTime(b.Start),
+            CustomerId = b.CustomerId
+        };
+
+        return View(model);
+    }
+
+    [HttpPost("edit/{id}")]
+    public async Task<IActionResult> Save(BookingViewModel bookingViewModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+        Booking b = new()
+        {
+            BookingId = bookingViewModel.BookingId,
+            Start = new DateTime(bookingViewModel.Date, bookingViewModel.Time),
+            CustomerId = bookingViewModel.CustomerId
+        };
+
+        var result = await _bookingUseCase.UpdateBooking(b);
+        if (result == null) {
+            return BadRequest();
+        }
+
+        return Redirect("/");
     }
 
 

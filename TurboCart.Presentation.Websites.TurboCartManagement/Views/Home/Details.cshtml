@@ -38,8 +38,8 @@
 </div>
 <div>
     @{ /*Html.ActionLink("Edit", "Edit", new { id = Model.PrimaryKey )*/ }
-    <a class="btn btn-primary mb-2 me-1" asp-action="Index">Edit</a>
-    <a class="btn btn-danger mb-2 me-1" asp-action="Index">Delete</a>
+    <a class="btn btn-primary mb-3 me-1" asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a>
+    <a class="btn btn-danger mb-3 me-1" asp-action="Index">Delete</a>
     <br/>
     <a asp-action="Index">Back to List</a>
 </div>
