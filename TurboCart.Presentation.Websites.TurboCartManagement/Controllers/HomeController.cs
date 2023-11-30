@@ -148,6 +148,8 @@ public class HomeController : Controller
         return Redirect("/");
     }
 
+
+
     [HttpGet("login")]
     public IActionResult Login() {
         return View();
@@ -173,9 +175,6 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Privacy() {
-        return View();
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error() {
