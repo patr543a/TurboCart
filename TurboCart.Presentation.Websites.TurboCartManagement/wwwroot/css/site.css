@@ -35,3 +35,8 @@ td a {
 td a:hover {
     color: unset;
 }
+
+option.seperator {
+    background: #c9c9c9;
+    font-size: 1pt;
+}

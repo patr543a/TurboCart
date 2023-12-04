@@ -10,5 +10,6 @@ namespace TurboCart.Presentation.Websites.TurboCartManagement.Models
         public TimeOnly Time { get; set; }
         public int CustomerId { get; set; }
         public IEnumerable<Customer>? AvailableCustomers { get; set; }
+        public string NewCustomerName { get; set; }
     }
 }

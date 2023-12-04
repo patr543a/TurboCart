@@ -74,6 +74,16 @@ public class HomeController : Controller
             Start = new DateTime(bookingViewModel.Date, bookingViewModel.Time),
             CustomerId = bookingViewModel.CustomerId
         };
+
+        if (bookingViewModel.CustomerId == 0) {
+            var customer = new Customer() { Name = bookingViewModel.NewCustomerName };
+            var cResult = await _customerUseCase.AddCustomer(customer);
+            if (cResult == null) {
+                return BadRequest("Fik ugyldigt svar tilbage fra serveren ved oprettelse af kunde");
+            }
+            b.CustomerId = cResult.CustomerId;
+        }
+
         var result = await _bookingUseCase.AddBooking(b);
         if (result == null) {
             return BadRequest("Fik ugyldigt svar tilbage fra serveren");
@@ -116,6 +126,15 @@ public class HomeController : Controller
             Start = new DateTime(bookingViewModel.Date, bookingViewModel.Time),
             CustomerId = bookingViewModel.CustomerId
         };
+
+        if (bookingViewModel.CustomerId == 0) {
+            var customer = new Customer() { Name = bookingViewModel.NewCustomerName };
+            var cResult = await _customerUseCase.AddCustomer(customer);
+            if (cResult == null) {
+                return BadRequest("Fik ugyldigt svar tilbage fra serveren ved oprettelse af kunde");
+            }
+            b.CustomerId = cResult.CustomerId;
+        }
 
         var result = await _bookingUseCase.UpdateBooking(b);
         if (result == null) {
