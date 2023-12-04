@@ -11,20 +11,23 @@ public class UserService
     {
     }
 
-    public async Task<User?> AddUser(string username, string password, User user)
-        => await PostAsJsonAsync($"api/User/{username}/{password}", user);
+    public async Task<User?> AddUser(Guid guid, User user)
+        => await PostAsJsonAsync($"api/User/{guid}", user);
 
-    public async Task<bool?> Authenticate(string username, string password)
-        => await PostAsJsonAsync<bool?>($"api/User/Auth/{username}/{password}", null);
+    public async Task<Guid> Authenticate(string username, string password)
+        => await PostAsJsonAsync<Guid?>($"api/User/Auth/{username}/{password}", null) ?? Guid.Empty;
 
-    public async Task<bool?> DeleteUser(string username, string password)
-        => await DeleteFromJsonAsync<bool?>($"api/User/{username}/{password}");
+    public async Task<bool?> Authenticate(Guid guid)
+        => await PostAsJsonAsync<bool?>($"api/User/Auth/{guid}", null);
+
+    public async Task<bool?> DeleteUser(Guid guid)
+        => await DeleteFromJsonAsync<bool?>($"api/User/{guid}");
 
     public async Task<bool?> IsValidUser(User user)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<User?> UpdateUser(string username, string password, User user)
-        => await PutAsJsonAsync($"api/User/{username}/{password}", user);
+    public async Task<User?> UpdateUser(Guid guid, User user)
+        => await PutAsJsonAsync($"api/User/{guid}", user);
 }

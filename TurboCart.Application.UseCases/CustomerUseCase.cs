@@ -11,10 +11,9 @@ public class CustomerUseCase(ITurboCartUnitOfWork _unitOfWork)
 {
     public async Task<bool?> IsValidCustomer(Customer customer)
     {
-        if (customer.Name is null || customer.Name.Length > 100)
-            return false;
+        customer.Bookings ??= [];
 
-        if (customer.Bookings is null)
+        if (customer.Name is null || customer.Name.Length > 100)
             return false;
 
         return true;
