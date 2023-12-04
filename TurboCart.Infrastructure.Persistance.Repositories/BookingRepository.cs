@@ -11,7 +11,7 @@ public class BookingRepository(DbContext _dbContext)
         => GetAll(b => b.Start.Date == date.ToDateTime(new TimeOnly()), includes: "Customer");
 
     public IEnumerable<Booking>? GetThisWeeksBookings()
-        => GetAll(b => b.Start.Date <= DateTime.Today.AddDays(7), includes: "Customer");
+        => GetAll(b => b.Start >= DateTime.Today && b.Start < DateTime.Today.AddDays(7), includes: "Customer");
 
     public IEnumerable<Booking>? GetTodaysBookings()
         => GetAll(b => b.Start.Date == DateTime.Today, includes: "Customer");
