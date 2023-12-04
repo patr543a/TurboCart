@@ -47,7 +47,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                         {
                             BookingId = 1,
                             CustomerId = 1,
-                            Start = new DateTime(2023, 11, 30, 11, 47, 11, 423, DateTimeKind.Local).AddTicks(3859)
+                            Start = new DateTime(2023, 12, 4, 9, 59, 2, 802, DateTimeKind.Local).AddTicks(3070)
                         });
                 });
 
@@ -101,7 +101,7 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("DeletedBooking");
+                    b.ToTable("DeletedBookings");
                 });
 
             modelBuilder.Entity("TurboCart.Domain.Entities.User", b =>
@@ -115,6 +115,9 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<Guid>("SessionToken")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Username");
 
                     b.ToTable("Users");
@@ -123,7 +126,8 @@ namespace TurboCart.Infrastructure.Persistance.Contexts.Migrations
                         new
                         {
                             Username = "admin",
-                            Password = "1234"
+                            Password = "1234",
+                            SessionToken = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 

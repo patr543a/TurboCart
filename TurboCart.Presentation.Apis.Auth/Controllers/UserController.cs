@@ -11,9 +11,20 @@ public class UserController(IUserUseCase _userUseCase)
     : ControllerBase
 {
     [HttpPost("Auth/{username}/{password}")]
-    public async Task<ActionResult<bool>> Authenticate(string username, string password)
+    public async Task<ActionResult<Guid>> Authenticate(string username, string password)
     {
         var result = await _userUseCase.Authenticate(username, password);
+
+        if (result != Guid.Empty)
+            return Ok(result);
+
+        return StatusCode(403);
+    }
+
+    [HttpPost("Auth/{guid}")]
+    public async Task<ActionResult> Authenticate(Guid guid)
+    {
+        var result = await _userUseCase.Authenticate(guid);
 
         if (result ?? false)
             return Ok();
@@ -21,12 +32,12 @@ public class UserController(IUserUseCase _userUseCase)
         return StatusCode(403);
     }
 
-    [HttpPost("{username}/{password}")]
-    public async Task<ActionResult<User>> PostUser(string username, string password, User user)
+    [HttpPost("{guid}")]
+    public async Task<ActionResult<User>> PostUser(Guid guid, User user)
     {
         try
         {
-            await _userUseCase.AddUser(username, password, user);
+            await _userUseCase.AddUser(guid, user);
         }
         catch
         {
@@ -36,12 +47,12 @@ public class UserController(IUserUseCase _userUseCase)
         return Ok(user);
     }
 
-    [HttpPut("{username}/{password}")]
-    public async Task<ActionResult<User>> PutUser(string username, string password, User user)
+    [HttpPut("{guid}")]
+    public async Task<ActionResult<User>> PutUser(Guid guid, User user)
     {
         try
         {
-            await _userUseCase.UpdateUser(username, password, user);
+            await _userUseCase.UpdateUser(guid, user);
         }
         catch
         {
@@ -51,12 +62,12 @@ public class UserController(IUserUseCase _userUseCase)
         return Ok(user);
     }
 
-    [HttpDelete("{username}/{password}")]
-    public async Task<ActionResult> DeleteUser(string username, string password)
+    [HttpDelete("{guid}")]
+    public async Task<ActionResult> DeleteUser(Guid guid)
     {
         try
         {
-            await _userUseCase.DeleteUser(username, password);
+            await _userUseCase.DeleteUser(guid);
         }
         catch
         {

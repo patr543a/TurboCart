@@ -7,21 +7,39 @@ namespace TurboCart.Infrastructure.Persistance.Repositories;
 public class UserRepository(DbContext _dbContext)
     : RepositoryBase<User, string>(_dbContext), IUserRepository
 {
-    public void Authenticate(string username, string password)
+    public Guid Authenticate(string username, string password)
     {
         var user = GetById(username);
 
         if (user is null || user.Password != password)
-            throw new AuthenticationException("Authentication failed");
+            return Guid.Empty;
+
+        return user.SessionToken = Guid.NewGuid();
     }
 
-    public void DeleteUser(string username, string password)
+    public bool Authenticate(Guid guid)
+    {
+        var result = _set.FirstOrDefault(u => u.SessionToken == guid);
+
+        if (result is null)
+            return false;
+
+        return true;
+    }
+
+    public void DeleteUser(Guid guid)
     {
         try
         {
-            Authenticate(username, password);
+            var auth = Authenticate(guid);
 
-            Delete(username);
+            if (!auth)
+                throw new AuthenticationException("Invalid Guid");
+
+            var user = _set.FirstOrDefault(u => u.SessionToken == guid) 
+                ?? throw new Exception();
+
+            Delete(user);
         }
         catch (AuthenticationException ex)
         {
@@ -33,11 +51,14 @@ public class UserRepository(DbContext _dbContext)
         }
     }
 
-    public void UpdateUser(string username, string password, User user)
+    public void UpdateUser(Guid guid, User user)
     {
         try
         {
-            Authenticate(username, password);
+            var auth = Authenticate(guid);
+
+            if (!auth)
+                throw new AuthenticationException("Invalid Guid");
 
             Update(user);
         }

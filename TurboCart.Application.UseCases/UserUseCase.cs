@@ -9,7 +9,7 @@ namespace TurboCart.Application.UseCases;
 public class UserUseCase(ITurboCartUnitOfWork _unitOfWork)
     : IUserUseCase
 {
-    public async Task<User?> AddUser(string username, string password, User user)
+    public async Task<User?> AddUser(Guid guid, User user)
     {
         if (!await IsValidUser(user) ?? false)
             throw new ArgumentException("User was not valid", nameof(user));
@@ -23,20 +23,29 @@ public class UserUseCase(ITurboCartUnitOfWork _unitOfWork)
         return user;
     }
 
-    public async Task<bool?> Authenticate(string username, string password)
+    public async Task<Guid> Authenticate(string username, string password)
     {
-        _unitOfWork
+        var guid = _unitOfWork
             .UserRepository
                 .Authenticate(username, password);
 
-        return true;
+        _unitOfWork.Commit();
+
+        return guid;
     }
 
-    public async Task<bool?> DeleteUser(string username, string password)
+    public async Task<bool?> Authenticate(Guid guid)
+        => _unitOfWork
+            .UserRepository
+                .Authenticate(guid);
+
+    public async Task<bool?> DeleteUser(Guid guid)
     {
         _unitOfWork
             .UserRepository
-                .DeleteUser(username, password);
+                .DeleteUser(guid);
+
+        _unitOfWork.Commit();
 
         return true;
     }
@@ -52,11 +61,11 @@ public class UserUseCase(ITurboCartUnitOfWork _unitOfWork)
         return true;
     }
 
-    public async Task<User?> UpdateUser(string username, string password, User user)
+    public async Task<User?> UpdateUser(Guid guid, User user)
     {
         _unitOfWork
             .UserRepository
-                .UpdateUser(username, password, user);
+                .UpdateUser(guid, user);
 
         return user;
     }

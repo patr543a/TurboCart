@@ -9,6 +9,7 @@ public class TurboCartContext
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<DeletedBooking> DeletedBookings { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TurboCartDb;Trusted_Connection=true;");
@@ -53,6 +54,9 @@ public class TurboCartContext
         modelBuilder.Entity<User>(u =>
         {
             u.HasKey(u => u.Username);
+
+            u.Property(u => u.SessionToken)
+                .IsRequired();
 
             u.Property(u => u.Username)
                 .HasMaxLength(50)
