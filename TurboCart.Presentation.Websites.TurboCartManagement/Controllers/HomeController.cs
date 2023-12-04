@@ -6,13 +6,13 @@ using TurboCart.Presentation.Websites.TurboCartManagement.Models;
 
 namespace TurboCart.Presentation.Websites.TurboCartManagement.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IBookingUseCase _bookingUseCase;
     private readonly ICustomerUseCase _customerUseCase;
 
-    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase, ICustomerUseCase customerUseCase)
+    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase, ICustomerUseCase customerUseCase, IUserUseCase userUseCase) : base(userUseCase)
     {
         _logger = logger;
         _bookingUseCase = bookingUseCase;
@@ -21,18 +21,24 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+        
         var model = await _bookingUseCase.GetTodaysBookings();
         return View(model);
     }
     
     [HttpGet("{date}")]
     public async Task<IActionResult> ListDay(DateOnly date) {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = await _bookingUseCase.GetBookingsForDate(date);
         return View("Index", model);
     }
 
     [HttpGet("week")]
     public async Task<IActionResult> ListThisWeek() {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = await _bookingUseCase.GetThisWeeksBookings();
         return View("Index", model);
     }
@@ -40,6 +46,8 @@ public class HomeController : Controller
     [HttpGet("all")]
     public async Task<IActionResult> ListAll()
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = await _bookingUseCase.GetAllBookings();
         return View("Index", model);
     }
@@ -48,9 +56,11 @@ public class HomeController : Controller
     [HttpGet("details/{id}")]
     public async Task<IActionResult> Details(int id)
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = await _bookingUseCase.GetBooking(id);
         if (model == null) {
-            return NotFound($"Booking med id {{id}} kunne ikke findes");
+            return NotFound($"Booking med id {id} kunne ikke findes");
         }
         return View(model);
     }
@@ -59,12 +69,16 @@ public class HomeController : Controller
     [HttpGet("new")]
     public async Task<IActionResult> CreateNew()
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = new BookingViewModel() { AvailableCustomers = await _customerUseCase.GetAllCustomers() };
         return View(model);
     }
 
     [HttpPost("new")]
     public async Task<IActionResult> CreateNew(BookingViewModel bookingViewModel) {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         if (!ModelState.IsValid) {
             return BadRequest("Alle felter er påkrævet");
         }
@@ -96,6 +110,8 @@ public class HomeController : Controller
     [HttpGet("edit/{id}")]
     public async Task<IActionResult> Edit(int id)
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var b = await _bookingUseCase.GetBooking(id);
         if (b == null) {
             return NotFound($"Booking med id {id} kunne ikke findes");
@@ -116,6 +132,8 @@ public class HomeController : Controller
     [HttpPost("edit/{id}")]
     public async Task<IActionResult> Save(BookingViewModel bookingViewModel)
     {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         if (!ModelState.IsValid)
         {
             return BadRequest("Alle felter er påkrævet");
@@ -146,7 +164,9 @@ public class HomeController : Controller
 
 
     [HttpGet("delete/{id}")]
-    public IActionResult Delete(int id) {
+    public async Task<IActionResult> Delete(int id) {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         var model = new DeleteReasonViewModel() {
             BookingId = id
         };
@@ -156,6 +176,8 @@ public class HomeController : Controller
 
     [HttpPost("delete/{id}")]
     public async Task<IActionResult> Delete(DeleteReasonViewModel deleteReasonViewModel) {
+        if (!await IsLoggedIn()) return Redirect("Login");
+
         string reason = deleteReasonViewModel.Reason;
         if (deleteReasonViewModel.Reason == "") {
             reason = deleteReasonViewModel.DetailedReason;

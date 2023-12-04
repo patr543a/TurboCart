@@ -5,14 +5,9 @@ using TurboCart.Presentation.Websites.TurboCartManagement.Models;
 namespace TurboCart.Presentation.Websites.TurboCartManagement.Controllers;
 
 [Route("Login")]
-public class LoginController : Controller
+public class LoginController : BaseController
 {
-    private readonly ILogger<LoginController> _logger;
-    private readonly IUserUseCase _userUseCase;
-
-    public LoginController(ILogger<LoginController> logger, IUserUseCase userUseCase) {
-        _logger = logger;
-        _userUseCase = userUseCase;
+    public LoginController(IUserUseCase userUseCase) : base(userUseCase) {
     }
 
     [HttpGet]
@@ -31,8 +26,14 @@ public class LoginController : Controller
             return BadRequest("Brugernavn eller kodeord er fokert");
         }
 
-        //TODO: log the user in
+        HttpContext.Session.SetString("_login", result.ToString());
 
         return Redirect("/");
+    }
+
+    [HttpGet("Logout")]
+    public IActionResult Logout() {
+        HttpContext.Session.Clear();
+        return Redirect("/Login");
     }
 }
