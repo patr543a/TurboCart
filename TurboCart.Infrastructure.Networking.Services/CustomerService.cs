@@ -20,9 +20,14 @@ public class CustomerService
     public async Task<Customer?> GetCustomer(int customerId)
         => await GetFromJsonAsync<Customer>($"api/Customer/{customerId}");
 
+    public async Task<IEnumerable<Customer>?> GetAllCustomers()
+        => await GetFromJsonAsync<IEnumerable<Customer>>($"api/Customer");
+
     public async Task<bool?> IsValidCustomer(Customer customer)
         => throw new NotImplementedException();
 
     public async Task<Customer?> UpdateCustomer(Customer customer)
         => await PutAsJsonAsync("api/Customer", customer);
+
+
 }

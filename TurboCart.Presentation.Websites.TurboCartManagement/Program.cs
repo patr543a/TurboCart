@@ -9,7 +9,7 @@ builder.AddServiceDefaults();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IBookingUseCase, BookingService>();
-//builder.Services.AddTransient<ICustomerUseCase, CustomerService>();  No get all customers use case, and therefore useless
+builder.Services.AddTransient<ICustomerUseCase, CustomerService>();
 builder.Services.AddTransient<IUserUseCase, UserService>();
 
 var app = builder.Build();

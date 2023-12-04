@@ -25,6 +25,11 @@ public class CustomerUseCase(ITurboCartUnitOfWork _unitOfWork)
             .CustomerRepository
                 .GetById(customerId);
 
+    public async Task<IEnumerable<Customer>?> GetAllCustomers()
+    => _unitOfWork
+        .CustomerRepository
+            .GetAll();
+
     public async Task<Customer?> AddCustomer(Customer customer)
     {
         if (!await IsValidCustomer(customer) ?? false)

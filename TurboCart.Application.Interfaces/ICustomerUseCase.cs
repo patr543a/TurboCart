@@ -9,4 +9,5 @@ public interface ICustomerUseCase
     Task<Customer?> UpdateCustomer(Customer customer);
     Task<int?> DeleteCustomer(int customerId);
     Task<Customer?> GetCustomer(int customerId);
+    Task<IEnumerable<Customer>?> GetAllCustomers();
 }

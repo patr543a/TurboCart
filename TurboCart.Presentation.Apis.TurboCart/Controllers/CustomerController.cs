@@ -9,6 +9,13 @@ namespace TurboCart.Presentation.Apis.TurboCart.Controllers;
 public class CustomerController(ICustomerUseCase _customerUseCase)
     : ControllerBase
 {
+    [HttpGet]
+    public async Task<ActionResult<Customer>> GetAll() {
+        var customers = await _customerUseCase.GetAllCustomers();
+
+        return Ok(customers);
+    }
+
     [HttpGet("{customerId}")]
     public async Task<ActionResult<Customer>> Get(int customerId)
     {

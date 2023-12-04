@@ -10,11 +10,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IBookingUseCase _bookingUseCase;
+    private readonly ICustomerUseCase _customerUseCase;
 
-    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase)
+    public HomeController(ILogger<HomeController> logger, IBookingUseCase bookingUseCase, ICustomerUseCase customerUseCase)
     {
         _logger = logger;
         _bookingUseCase = bookingUseCase;
+        _customerUseCase = customerUseCase;
     }
 
     public async Task<IActionResult> Index()
@@ -55,9 +57,10 @@ public class HomeController : Controller
 
 
     [HttpGet("new")]
-    public IActionResult CreateNew()
+    public async Task<IActionResult> CreateNew()
     {
-        return View();
+        var model = new BookingViewModel() { AvailableCustomers = await _customerUseCase.GetAllCustomers() };
+        return View(model);
     }
 
     [HttpPost("new")]
@@ -93,7 +96,8 @@ public class HomeController : Controller
             BookingId = b.BookingId,
             Date = DateOnly.FromDateTime(b.Start),
             Time = TimeOnly.FromDateTime(b.Start),
-            CustomerId = b.CustomerId
+            CustomerId = b.CustomerId,
+            AvailableCustomers = await _customerUseCase.GetAllCustomers()
         };
 
         return View(model);

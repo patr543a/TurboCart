@@ -4,7 +4,7 @@
     ViewData["Title"] = "CreateNew";
 }
 
-<h1>CreateNew</h1>
+<h1>Opret en ny booking</h1>
 
 <h4>Booking</h4>
 <hr />
@@ -15,25 +15,26 @@
             <input asp-for="BookingId" type="hidden" value="0"/>
 
             <div class="form-group mb-3">
-                <label asp-for="Date" class="control-label">Date</label>
-                <input asp-for="Date" type="date" class="form-control" />
+                <label asp-for="Date" class="control-label">Dato</label>
+                <input asp-for="Date" type="date" class="form-control" value=""/>
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Time" class="control-label">Time</label>
-                <input asp-for="Time" type="time" class="form-control" />
+                <label asp-for="Time" class="control-label">Tid</label>
+                <input asp-for="Time" type="time" class="form-control" value=""/>
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <!--<label asp-for="CustomerId" class="control-label"></label>
+                <label asp-for="CustomerId" class="control-label">Kunde</label>
                 <select asp-for="CustomerId" class="form-select">
-                    <option value="" selected disabled>Choose customer</option>
-                    <option value="1">Name</option>
-                </select>-->
-
-                <label asp-for="CustomerId" class="control-label">Customer Id</label>
-                <input asp-for="CustomerId" type="number" class="form-control" />
+                    <option value="" selected disabled>Vælg en kunde</option>
+                    @foreach (var customer in Model.AvailableCustomers ?? []) {
+                        <option value="@customer.CustomerId">@customer.Name</option>
+                    }
+                </select>
+                <!--<label asp-for="CustomerId" class="control-label">Customer Id</label>
+                <input asp-for="CustomerId" type="number" class="form-control" />-->
                 <span asp-validation-for="CustomerId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">

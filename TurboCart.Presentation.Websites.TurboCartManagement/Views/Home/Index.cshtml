@@ -40,18 +40,18 @@
     <h1 class="display-4">@title</h1>
 </div>
 <div>
-    <div class="btn-group me-3">
+    <div class="btn-group me-3 mb-3">
         <a asp-action="Index" class="btn btn-outline-primary">I dag</a>
         <a asp-action="ListThisWeek" class="btn btn-outline-primary">Denne uge</a>
         <a asp-action="ListAll" class="btn btn-outline-primary">Alle</a>
     </div>
-    <div class="btn-group me-3">
+    <div class="btn-group me-3 mb-3">
         <a asp-action="ListDay" asp-route-date="@previousDay.ToString(datetimePattern)" class="btn btn-outline-primary">Tilbage</a>
         <a asp-action="ListDay" asp-route-date="@nextDay.ToString(datetimePattern)" class="btn btn-outline-primary">Næste</a>
     </div>
 
-    @if (Model.Count() > 1) {
-        <table class="table table-hover">
+    @if (Model.Count() > 0) {
+        <table class="table table-hover mb-3">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -62,18 +62,19 @@
             </thead>
             <tbody>
                 @foreach(var booking in Model) {
+                    string name = booking.Customer?.Name ?? "[Ukendt Navn]";
                     <tr>
                         <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.BookingId </a></td>
                         <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("dddd, dd MMMM yyyy", datetimeCulture) </a></td>
                         <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Start.ToString("t", datetimeCulture) </a></td>
-                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @booking.Customer.Name </a></td>
+                        <td><a asp-action="Details" asp-route-id="@booking.BookingId" draggable="false"> @name </a></td>
                     </tr>
                 }
             </tbody>
         </table>
     }
     else {
-        <h2>Der er ingen @title</h2>
+        <h2 class="mb-3">Der er ingen @title</h2>
     }
     <a class="btn btn-primary" asp-action="CreateNew">Opret ny booking</a>
 </div>

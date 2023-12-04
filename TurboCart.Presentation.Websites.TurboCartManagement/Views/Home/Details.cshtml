@@ -4,6 +4,8 @@
     ViewData["Title"] = "Details";
 
     var datetimeCulture = new System.Globalization.CultureInfo("da-DK");
+
+    string name = Model.Customer?.Name ?? "[Ukendt navn]";
 }
 
 <h1>Detaljer</h1>
@@ -30,7 +32,7 @@
         </dd>
         <dt class="col-sm-2">Kunde</dt>
         <dd class="col-sm-10">
-            @Model.Customer.Name
+            @name
         </dd>
     </dl>
 </div>
