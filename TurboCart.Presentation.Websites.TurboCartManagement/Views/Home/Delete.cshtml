@@ -55,16 +55,18 @@
 <div>
     <a asp-action="Details" asp-route-id="@Model.BookingId">Tilbage til booking</a>
 </div>
-<script>
-    var select = document.querySelector("#Reason");
-    var textarea = document.querySelector("#DetailedReason");
-    textarea.style.display = "none";
 
-    select.addEventListener('change', function () {
-        if (select.value == "") {
-            textarea.style.display = "block";
-        } else {
-            textarea.style.display = "none";
-        }
-    });
-</script>
+@section Scripts {
+    <script>
+        $("#DetailedReason").hide();
+
+        $("#Reason").change(function() {
+            if($("#Reason").val() == ""){
+                $("#DetailedReason").show();
+            }
+            else {
+                $("#DetailedReason").hide();
+            }
+        });
+    </script>
+}
