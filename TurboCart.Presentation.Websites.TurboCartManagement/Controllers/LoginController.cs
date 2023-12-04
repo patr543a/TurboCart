@@ -26,11 +26,8 @@ public class LoginController : Controller
             return BadRequest("Brugernavn og kodeord er påkrævet");
         }
 
-        bool? result = await _userUseCase.Authenticate(loginViewModel.Username, loginViewModel.Password);
-        if (result == null) {
-            return BadRequest("Fik ugyldigt svar tilbage fra serveren");
-        }
-        if (result == false) {
+        Guid result = await _userUseCase.Authenticate(loginViewModel.Username, loginViewModel.Password);
+        if (result == Guid.Empty) {
             return BadRequest("Brugernavn eller kodeord er fokert");
         }
 
