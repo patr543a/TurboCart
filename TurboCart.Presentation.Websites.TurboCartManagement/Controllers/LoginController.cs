@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using TurboCart.Application.Interfaces;
 using TurboCart.Presentation.Websites.TurboCartManagement.Models;
 
@@ -12,18 +13,26 @@ public class LoginController : BaseController
 
     [HttpGet]
     public IActionResult Index() {
-        return View();
+        var model = new LoginViewModel() {
+            Username = "",
+            Password = ""
+        };
+        return View(model);
     }
 
     [HttpPost]
     public async Task<IActionResult> Index(LoginViewModel loginViewModel) {
         if (!ModelState.IsValid) {
-            return BadRequest("Brugernavn og kodeord er påkrævet");
+            loginViewModel.Password = "";
+            loginViewModel.ErrorMessage = "Brugernavn og kodeord er påkrævet";
+            return View(loginViewModel);
         }
 
         Guid result = await _userUseCase.Authenticate(loginViewModel.Username, loginViewModel.Password);
         if (result == Guid.Empty) {
-            return BadRequest("Brugernavn eller kodeord er fokert");
+            loginViewModel.Password = "";
+            loginViewModel.ErrorMessage = "Brugernavn eller kodeord er fokert";
+            return View(loginViewModel);
         }
 
         HttpContext.Session.SetString("_login", result.ToString());

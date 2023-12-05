@@ -8,6 +8,10 @@
 
 <div class="form-signin">
     <form method="post">
+        @if (!string.IsNullOrEmpty(@Model.ErrorMessage)) {
+            <p class="text-danger field-validation-error">@Model.ErrorMessage</p>
+        }
+
         <div class="form-floating mb-3">
             <input asp-for="Username" class="form-control" placeholder="Brugenavn">
             <label asp-for="Username">Brugenavn</label>
