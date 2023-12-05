@@ -18,7 +18,7 @@ public class UserController(IUserUseCase _userUseCase)
         if (result != Guid.Empty)
             return Ok(result);
 
-        return StatusCode(403);
+        return StatusCode(403, Guid.Empty);
     }
 
     [HttpPost("Auth/{guid}")]
@@ -29,7 +29,7 @@ public class UserController(IUserUseCase _userUseCase)
         if (result ?? false)
             return Ok(true);
 
-        return StatusCode(403, null);
+        return StatusCode(403, false);
     }
 
     [HttpPost("{guid}")]
