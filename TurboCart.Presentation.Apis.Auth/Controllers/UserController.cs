@@ -22,14 +22,14 @@ public class UserController(IUserUseCase _userUseCase)
     }
 
     [HttpPost("Auth/{guid}")]
-    public async Task<ActionResult> Authenticate(Guid guid)
+    public async Task<ActionResult<bool>> Authenticate(Guid guid)
     {
         var result = await _userUseCase.Authenticate(guid);
 
         if (result ?? false)
-            return Ok();
+            return Ok(true);
 
-        return StatusCode(403);
+        return StatusCode(403, null);
     }
 
     [HttpPost("{guid}")]

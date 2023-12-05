@@ -12,7 +12,6 @@ namespace TurboCart.Presentation.Websites.TurboCartManagement.Controllers
         }
 
         public async Task<bool> IsLoggedIn() {
-            return true; //FIXME
             if (Guid.TryParse(HttpContext.Session.GetString("_login"), out Guid guid)) {
                 return await _userUseCase.Authenticate(guid) ?? false;
             }
