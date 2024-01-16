@@ -1,0 +1,108 @@
+﻿@page "/"
+@using TurboCart.Infrastructure.Networking.Services
+@inject ITurboCartSessionService SessionService
+
+<PageTitle>Omgangstider</PageTitle>
+
+<div class="container">
+	@if (!_session?.IsActive ?? true)
+	{
+		<div class="mt-5 text-light">
+			<h3>Ingen aktiv ræs</h3>
+			<p>
+				Der er ikke et ræs aktivt på dette tidspunkt.
+			</p>
+		</div>
+	}
+
+	<table class="table table-dark table-striped table-hover my-5">
+		<thead>
+			<tr>
+				<th scope="col" class="col-1">Top</th>
+				<th scope="col">Navn</th>
+				<th scope="col" class="col-1 text-center">Nr.</th>
+				<th scope="col" class="col-1 text-center">Omgang</th>
+				<th scope="col">Omgang tid</th>
+				<th scope="col" class="col-2 text-end">Tid</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (_session is not null && _session.Carts.Any())
+			{
+				int i = 1;
+
+				foreach (var cart in _session.Carts)
+				{
+					<tr>
+						<th scope="row">@i</th>
+						<td>@cart.DriverName</td>
+						<td class="text-center">@cart.CartNumber</td>
+						<td class="text-center">@cart.LapNumber</td>
+						<td class="text-start">
+							@(cart.LapTime.TotalMinutes > 1 ?
+							$"{cart.LapTime.Minutes}m {cart.LapTime.Seconds:##}.{cart.LapTime.Milliseconds:000}s" :
+							$"{cart.LapTime.Seconds}.{cart.LapTime.Milliseconds:000}s")
+						</td>
+						<td></td>
+					</tr>
+
+					i++;
+				}
+			}
+			else
+			{
+				<tr>
+					<th scope="row">1</th>
+					<td>Ingen data</td>
+					<td class="text-center">Ingen data</td>
+					<td class="text-center">Ingen data</td>
+					<td class="text-start">Ingen data</td>
+					<td class="text-end">Ingen data</td>
+				</tr>
+			}
+		</tbody>
+
+		<tfoot>
+			@if (_session is not null)
+			{
+				<tr>
+					<th scope="row"></th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="text-end">
+						@(_session.TotalTime.TotalHours > 1 ?
+							$"{_session.TotalTime.Hours}h {_session.TotalTime.Minutes:##}m {_session.TotalTime.Seconds:##}s" :
+							_session.TotalTime.TotalMinutes > 1 ?
+								$"{_session.TotalTime.Minutes}m {_session.TotalTime.Seconds:##}s" :
+								$"{_session.TotalTime.Seconds}s")
+					</td>
+				</tr>
+			}
+			else
+			{
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			}
+		</tfoot>
+	</table>
+
+	@if (_session?.IsFinished ?? false)
+	{
+		var winner = _session.Carts.FirstOrDefault();
+
+		<div class="text-light">
+			<h3>Ræset er slut</h3>
+			<p>
+				Vinderen er <b>@(winner?.DriverName ?? "N/A")</b> i nr. <b>@(winner?.CartNumber ?? -1)</b>
+			</p>
+		</div>
+	}
+</div>
