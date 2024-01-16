@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";
+
+option csharp_namespace = "TurboCart.Infrastructure.Networking.Grpc";
+
+package session;
+
+// The session service definition.
+service Session {
+	// Updates session
+	rpc SessionChanged (SessionRequest) returns (SessionReply);
+}
+
+// The request containing the new session data.
+message SessionRequest {
+	google.protobuf.Duration totalTime = 1;
+	repeated SessionCart carts = 3;
+}
+
+// The response to updating the session.
+message SessionReply {
+}
+
+// Information about a cart in the race
+message SessionCart {
+	int32 cartNumber = 1;
+	string driverName = 2;
+	int32 lapNumber = 3;
+	bool isFinished = 4;
+	google.protobuf.Duration lapTime = 5;
+	google.protobuf.Duration totalTime = 6;
+}
