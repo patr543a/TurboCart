@@ -57,6 +57,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Infrastructure.Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Websites.TurboCartManagement", "TurboCart.Presentation.Websites.TurboCartManagement\TurboCart.Presentation.Websites.TurboCartManagement.csproj", "{A93FE7D7-F58D-47EC-AB92-9BEE77F0E4AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Infrastructure.Networking.Grpc", "TurboCart.Infrastructure.Networking.Grpc\TurboCart.Infrastructure.Networking.Grpc.csproj", "{F2803799-FA93-4E71-BC5E-BADF3A7C412E}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "TurboCart.Infrastructure.Networking.SignalR", "TurboCart.Infrastructure.Networking.SignalR\TurboCart.Infrastructure.Networking.SignalR.fsproj", "{16C3523E-6051-403A-8BE3-17E79EB14268}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrpcClients", "GrpcClients", "{994F3612-E33E-41B3-8044-7B0731E1C9B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.GrpcClients.SessionClient", "TurboCart.Presentation.GrpcClients.SessionClient\TurboCart.Presentation.GrpcClients.SessionClient.csproj", "{2052D70F-6816-4B63-AAB4-353BE82585DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCart.Presentation.Websites.TurboCartSession", "TurboCart.Presentation.Websites.TurboCartSession\TurboCart.Presentation.Websites.TurboCartSession.csproj", "{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +145,22 @@ Global
 		{A93FE7D7-F58D-47EC-AB92-9BEE77F0E4AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A93FE7D7-F58D-47EC-AB92-9BEE77F0E4AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A93FE7D7-F58D-47EC-AB92-9BEE77F0E4AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2803799-FA93-4E71-BC5E-BADF3A7C412E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2803799-FA93-4E71-BC5E-BADF3A7C412E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2803799-FA93-4E71-BC5E-BADF3A7C412E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2803799-FA93-4E71-BC5E-BADF3A7C412E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16C3523E-6051-403A-8BE3-17E79EB14268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16C3523E-6051-403A-8BE3-17E79EB14268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16C3523E-6051-403A-8BE3-17E79EB14268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16C3523E-6051-403A-8BE3-17E79EB14268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2052D70F-6816-4B63-AAB4-353BE82585DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2052D70F-6816-4B63-AAB4-353BE82585DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2052D70F-6816-4B63-AAB4-353BE82585DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2052D70F-6816-4B63-AAB4-353BE82585DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +186,11 @@ Global
 		{BDDAC06F-648B-4898-92C0-00007B340BC7} = {4BE981CE-446A-4C1F-AD2E-27CDAD2139C4}
 		{3675F853-6DC2-4883-8855-04E24CDB999C} = {BDDAC06F-648B-4898-92C0-00007B340BC7}
 		{A93FE7D7-F58D-47EC-AB92-9BEE77F0E4AD} = {591E0ED3-6214-4CC9-B8FD-53BAD707C0EE}
+		{F2803799-FA93-4E71-BC5E-BADF3A7C412E} = {BDDAC06F-648B-4898-92C0-00007B340BC7}
+		{16C3523E-6051-403A-8BE3-17E79EB14268} = {BDDAC06F-648B-4898-92C0-00007B340BC7}
+		{994F3612-E33E-41B3-8044-7B0731E1C9B0} = {DB49ABB8-015F-490E-BCE4-94DB55DCCB26}
+		{2052D70F-6816-4B63-AAB4-353BE82585DD} = {994F3612-E33E-41B3-8044-7B0731E1C9B0}
+		{D1DEBC88-17D2-4E1E-AACF-6C1C8481D842} = {591E0ED3-6214-4CC9-B8FD-53BAD707C0EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5115A469-BBB4-45AB-A0B1-9031B2DA56EE}
