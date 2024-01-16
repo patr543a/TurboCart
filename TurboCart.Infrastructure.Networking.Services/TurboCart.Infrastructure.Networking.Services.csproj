@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TurboCart.Application.Interfaces\TurboCart.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\TurboCart.Infrastructure.Networking.SignalR\TurboCart.Infrastructure.Networking.SignalR.fsproj" />
   </ItemGroup>
 
 </Project>
